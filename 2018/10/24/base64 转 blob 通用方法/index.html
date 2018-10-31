@@ -2,23 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Hello World111111 - MaTonna Blog</title>
+<title>base64 转 blob 通用方法 - MaTonna Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="1234567891011121314dataURItoBlob(base64Data) &amp;#123;    let byteString;    if (base64Data.split(&apos;,&apos;)[0].indexOf(&apos;base64&apos;) &amp;gt;= 0) byteString = atob(base64Data.split(&apos;,&apos;)[1]);    else byteString = unes">
 <meta name="keywords" content="blog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World111111">
-<meta property="og:url" content="http://yoursite.com/2018/10/24/hello-world1/index.html">
+<meta property="og:title" content="base64 转 blob 通用方法">
+<meta property="og:url" content="http://yoursite.com/2018/10/24/base64 转 blob 通用方法/index.html">
 <meta property="og:site_name" content="MaTonna Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="1234567891011121314dataURItoBlob(base64Data) &amp;#123;    let byteString;    if (base64Data.split(&apos;,&apos;)[0].indexOf(&apos;base64&apos;) &amp;gt;= 0) byteString = atob(base64Data.split(&apos;,&apos;)[1]);    else byteString = unes">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-24T11:24:00.778Z">
+<meta property="og:updated_time" content="2018-10-31T09:28:42.141Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World111111">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="base64 转 blob 通用方法">
+<meta name="twitter:description" content="1234567891011121314dataURItoBlob(base64Data) &amp;#123;    let byteString;    if (base64Data.split(&apos;,&apos;)[0].indexOf(&apos;base64&apos;) &amp;gt;= 0) byteString = atob(base64Data.split(&apos;,&apos;)[1]);    else byteString = unes">
 
 
 
@@ -86,9 +86,11 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item" href="/">主页</a>
                 
-                <a class="navbar-item" href="/archives">Archives</a>
+                <a class="navbar-item" href="/archives">文章</a>
+                
+                <a class="navbar-item" href="/cook">做菜</a>
                 
             </div>
             
@@ -128,7 +130,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 121 words)
+                    a few seconds read (About 55 words)
                 </span>
                 
             </div>
@@ -136,19 +138,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Hello World111111
+                base64 转 blob 通用方法
             
         </h1>
         <div class="content">
-            <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+            <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">dataURItoBlob(base64Data) &#123;</span><br><span class="line">    <span class="hljs-built_in">let</span> byteString;</span><br><span class="line">    <span class="hljs-keyword">if</span> (base64Data.split(<span class="hljs-string">','</span>)[0].indexOf(<span class="hljs-string">'base64'</span>) &gt;= 0) byteString = atob(base64Data.split(<span class="hljs-string">','</span>)[1]);</span><br><span class="line">    <span class="hljs-keyword">else</span> byteString = unescape(base64Data.split(<span class="hljs-string">','</span>)[1]);</span><br><span class="line">    <span class="hljs-built_in">let</span> mimeString = base64Data</span><br><span class="line">      .split(<span class="hljs-string">','</span>)[0]</span><br><span class="line">      .split(<span class="hljs-string">':'</span>)[1]</span><br><span class="line">      .split(<span class="hljs-string">';'</span>)[0];</span><br><span class="line">    <span class="hljs-built_in">let</span> ia = new Uint8Array(byteString.length);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">let</span> i = 0; i &lt; byteString.length; i++) &#123;</span><br><span class="line">      ia[i] = byteString.charCodeAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">return</span> new Blob([ia], &#123; <span class="hljs-built_in">type</span>: mimeString &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -206,7 +200,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Entradas
+                        Posts
                     </p>
                     <p class="title has-text-weight-normal">
                         2
@@ -216,7 +210,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Categorias
+                        Categories
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -226,7 +220,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Etiquetas
+                        Tags
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -236,19 +230,9 @@
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/MaTonna">
-                SEGUIR</a>
+                Follow</a>
         </div>
         
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white" target="_blank" title="Github" href="https://github.com/MaTonna">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-        </div>
         
     </div>
 </div>
@@ -288,7 +272,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Categories
             </h3>
             <ul class="menu-list">
             
@@ -306,21 +290,21 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
         
         <article class="media">
             
-            <a href="/2018/10/24/hello-world1/" class="media-left">
+            <a href="/2018/10/24/base64 转 blob 通用方法/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World111111">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="base64 转 blob 通用方法">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T11:20:27.337Z">2018-10-24</time></div>
-                    <a href="/2018/10/24/hello-world1/" class="has-link-black-ter is-size-6">Hello World111111</a>
+                    <a href="/2018/10/24/base64 转 blob 通用方法/" class="has-link-black-ter is-size-6">base64 转 blob 通用方法</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -355,7 +339,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -379,7 +363,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
                 
@@ -402,21 +386,21 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
         
         <article class="media">
             
-            <a href="/2018/10/24/hello-world1/" class="media-left">
+            <a href="/2018/10/24/base64 转 blob 通用方法/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World111111">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="base64 转 blob 通用方法">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T11:20:27.337Z">2018-10-24</time></div>
-                    <a href="/2018/10/24/hello-world1/" class="has-link-black-ter is-size-6">Hello World111111</a>
+                    <a href="/2018/10/24/base64 转 blob 通用方法/" class="has-link-black-ter is-size-6">base64 转 blob 通用方法</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -451,7 +435,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -475,7 +459,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
                 
@@ -500,11 +484,12 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2018 MaTonna&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                &copy; 2018 MaTonna
+                <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a> -->
                 </p>
             </div>
-            <div class="level-end">
+            <!-- <div class="level-end">
             
                 <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
                 
@@ -535,7 +520,7 @@
                 
                 </div>
             
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>
@@ -692,10 +677,10 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
+                POSTS: 'Posts',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
