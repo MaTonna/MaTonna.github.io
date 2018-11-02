@@ -144,7 +144,7 @@
 <li>访问一个接口，校验传入的authorization是否和登录时的token匹配，匹配通过则返回接口数据，否则响应未通过认证。</li>
 </ul>
 <h3 id="github"><a href="#github" class="headerlink" title="github"></a>github</h3><p><a href="https://github.com/MaTonna/express-manage-web">https://github.com/MaTonna/express-manage-web</a></p>
-<h4 id="用到的依赖和工具"><a href="#用到的依赖和工具" class="headerlink" title="用到的依赖和工具"></a>用到的依赖和工具</h4><ul>
+<h3 id="用到的依赖和工具"><a href="#用到的依赖和工具" class="headerlink" title="用到的依赖和工具"></a>用到的依赖和工具</h3><ul>
 <li>工具：postman 发送请求和接收响应，用于调接口</li>
 <li>“bcrypt”: “^3.0.2”  对注册密码进行加密</li>
 <li>“body-parser”: “^1.18.3”  对post请求的请求体进行解析</li>
@@ -155,7 +155,7 @@
 <li>“passport”: “^0.4.0”  用于验证登录信息，如果token通过才能访问接口</li>
 <li>“passport-jwt”: “^4.0.0”</li>
 </ul>
-<p>####目录结构<br>config<br>    keys.js mongodb配置<br>    passport.js 用passport-jwt验证token<br>models<br>    User.js 用mongoose创建模型<br>routers<br>    api<br>        users.js 接口文档<br>server.js 入口文件<br>package.json<br>package-lock.json</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>config<br>    keys.js mongodb配置<br>    passport.js 用passport-jwt验证token<br>models<br>    User.js 用mongoose创建模型<br>routers<br>    api<br>        users.js 接口文档<br>server.js 入口文件<br>package.json<br>package-lock.json</p>
 <h3 id="server-js"><a href="#server-js" class="headerlink" title="server.js"></a>server.js</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">const express = require(<span class="hljs-string">'express'</span>);</span><br><span class="line">const mongoose = require(<span class="hljs-string">'mongoose'</span>);</span><br><span class="line">const bodyParser = require(<span class="hljs-string">'body-parser'</span>);</span><br><span class="line">const passport = require(<span class="hljs-string">'passport'</span>);</span><br><span class="line">// 接口api</span><br><span class="line">const users = require(<span class="hljs-string">'./routers/api/users'</span>);</span><br><span class="line">const profiles = require(<span class="hljs-string">'./routers/api/profiles'</span>);</span><br><span class="line"></span><br><span class="line">const app = express();</span><br><span class="line"></span><br><span class="line">// 使用body-parser中间件</span><br><span class="line">app.use(bodyParser.urlencoded(&#123; extended: <span class="hljs-literal">false</span> &#125;));</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line"></span><br><span class="line">// 使用中间件使用users,访问/api/users时获取到users</span><br><span class="line">app.use(<span class="hljs-string">'/api/users'</span>, users);</span><br><span class="line">app.use(<span class="hljs-string">'/api/profiles'</span>, profiles);</span><br><span class="line"></span><br><span class="line">// 链接数据库</span><br><span class="line">const db = require(<span class="hljs-string">'./config/keys'</span>).mongoURL;</span><br><span class="line">mongoose</span><br><span class="line">	.connect(</span><br><span class="line">		db,</span><br><span class="line">		&#123; useNewUrlParser: <span class="hljs-literal">true</span> &#125;</span><br><span class="line">	)</span><br><span class="line">	.<span class="hljs-keyword">then</span>(() =&gt; &#123;</span><br><span class="line">		console.log(<span class="hljs-string">'connect'</span>);</span><br><span class="line">	&#125;)</span><br><span class="line">	.catch(err =&gt; &#123;</span><br><span class="line">		console.log(err);</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	// 初始化passport</span><br><span class="line">// passport的配置</span><br><span class="line">app.use(passport.initialize());</span><br><span class="line">require(<span class="hljs-string">'./config/passport'</span>)(passport);</span><br><span class="line"></span><br><span class="line">// 访问主页时给页面发送数据</span><br><span class="line">app.get(<span class="hljs-string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">	res.send(<span class="hljs-string">'hello world'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">const port = process.env.PORT || 5000;</span><br><span class="line"></span><br><span class="line">app.listen(port, () =&gt; &#123;</span><br><span class="line">	console.log(<span class="hljs-string">'server start'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="users-js"><a href="#users-js" class="headerlink" title="users.js"></a>users.js</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">const express = require(<span class="hljs-string">'express'</span>);</span><br><span class="line">const router = express.Router();</span><br><span class="line">const bcrypt = require(<span class="hljs-string">'bcrypt'</span>);</span><br><span class="line">const jwt = require(<span class="hljs-string">'jsonwebtoken'</span>);</span><br><span class="line">const gravatar = require(<span class="hljs-string">'gravatar'</span>);</span><br><span class="line">const keys = require(<span class="hljs-string">'../../config/keys'</span>);</span><br><span class="line">const passport = require(<span class="hljs-string">'passport'</span>);</span><br><span class="line"></span><br><span class="line">const User = require(<span class="hljs-string">'../../models/User'</span>);</span><br><span class="line"></span><br><span class="line">// <span class="hljs-variable">$router</span> POST api/users/register</span><br><span class="line">// @desc 返回请求的json数据</span><br><span class="line">// @access public</span><br><span class="line">router.post(<span class="hljs-string">'/register'</span>, (req, res) =&gt; &#123;</span><br><span class="line">	// 查询一条记录</span><br><span class="line">	User.findOne(&#123;</span><br><span class="line">		email: req.body.email</span><br><span class="line">	&#125;).<span class="hljs-keyword">then</span>(user =&gt; &#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (user) &#123;</span><br><span class="line">			<span class="hljs-built_in">return</span> res.status(400).json(<span class="hljs-string">'邮箱已被注册'</span>);</span><br><span class="line">		&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">			var avatar = gravatar.url(<span class="hljs-string">'req.body.email'</span>, &#123; s: <span class="hljs-string">'200'</span>, r: <span class="hljs-string">'pg'</span>, d: <span class="hljs-string">'mm'</span> &#125;);</span><br><span class="line">			const newUser = new User(&#123;</span><br><span class="line">				avatar,</span><br><span class="line">				name: req.body.name,</span><br><span class="line">				email: req.body.email,</span><br><span class="line">				password: req.body.password,</span><br><span class="line">				identity: req.body.identity</span><br><span class="line">			&#125;);</span><br><span class="line"></span><br><span class="line">			// 用bcrypt对密码进行加密</span><br><span class="line">			bcrypt.genSalt(10, <span class="hljs-keyword">function</span>(err, salt) &#123;</span><br><span class="line">				bcrypt.hash(newUser.password, salt, (err, <span class="hljs-built_in">hash</span>) =&gt; &#123;</span><br><span class="line">					<span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">						throw err;</span><br><span class="line">					&#125;</span><br><span class="line">					// <span class="hljs-built_in">hash</span>为加密后的密码</span><br><span class="line">					newUser.password = <span class="hljs-built_in">hash</span>;</span><br><span class="line">					// 调用存储方法</span><br><span class="line">					newUser</span><br><span class="line">						.save()</span><br><span class="line">						.<span class="hljs-keyword">then</span>(user =&gt; &#123;</span><br><span class="line">							res.json(user);</span><br><span class="line">						&#125;)</span><br><span class="line">						.catch(err =&gt; &#123;</span><br><span class="line">							console.log(err);</span><br><span class="line">						&#125;);</span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// <span class="hljs-variable">$router</span> POST api/users/login</span><br><span class="line">// @desc 返回token jwt password</span><br><span class="line">// @access public</span><br><span class="line">router.post(<span class="hljs-string">'/login'</span>, (req, res) =&gt; &#123;</span><br><span class="line">	const email = req.body.email;</span><br><span class="line">	const password = req.body.password;</span><br><span class="line">	User.findOne(&#123; email &#125;).<span class="hljs-keyword">then</span>(user =&gt; &#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (!user) &#123;</span><br><span class="line">			<span class="hljs-built_in">return</span> res.status(404).json(<span class="hljs-string">'用户不存在'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		// 密码匹配</span><br><span class="line">		bcrypt.compare(password, user.password).<span class="hljs-keyword">then</span>(isMatch =&gt; &#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> (isMatch) &#123;</span><br><span class="line">				// 规则，加密名字，过期时间，回调</span><br><span class="line">				const rule = &#123;</span><br><span class="line">					id: user.id,</span><br><span class="line">					name: user.name,</span><br><span class="line">					avatar: user.avatar,</span><br><span class="line">					identity: user.identity</span><br><span class="line">				&#125;;</span><br><span class="line">				// 登录成功后返回token，相当于一个令牌，只有令牌校验成功，才可以获取想要的数据</span><br><span class="line">				jwt.sign(rule, keys.secretOrKey, &#123; expiresIn: 3600 &#125;, (err, token) =&gt; &#123;</span><br><span class="line">					<span class="hljs-keyword">if</span> (err) &#123;</span><br><span class="line">						throw err;</span><br><span class="line">					&#125;</span><br><span class="line">					res.json(&#123;</span><br><span class="line">						success: <span class="hljs-literal">true</span>,</span><br><span class="line">						// 必须加Bearer</span><br><span class="line">						token: <span class="hljs-string">'Bearer '</span> + token</span><br><span class="line">					&#125;);</span><br><span class="line">				&#125;);</span><br><span class="line">				// res.json(&#123; msg: <span class="hljs-string">'success'</span> &#125;);</span><br><span class="line">			&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">				<span class="hljs-built_in">return</span> res.status(404).json(<span class="hljs-string">'密码错误'</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// <span class="hljs-variable">$router</span> GET api/users/current</span><br><span class="line">// @desc 返回current user</span><br><span class="line">// @access private</span><br><span class="line">router.get(<span class="hljs-string">'/current'</span>, passport.authenticate(<span class="hljs-string">'jwt'</span>, &#123; session: <span class="hljs-literal">false</span> &#125;), (req, res) =&gt; &#123;</span><br><span class="line">	res.json(&#123;</span><br><span class="line">		id: req.user.id,</span><br><span class="line">		name: req.user.name,</span><br><span class="line">		email: req.user.email,</span><br><span class="line">		identity: req.user.identity</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = router;</span><br></pre></td></tr></table></figure>
 <h3 id="User-js"><a href="#User-js" class="headerlink" title="User.js"></a>User.js</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(<span class="hljs-string">'mongoose'</span>);</span><br><span class="line">const Schema = mongoose.Schema;</span><br><span class="line"></span><br><span class="line">// 创建模型和所需要的字段</span><br><span class="line">const UserSchema = new Schema(&#123;</span><br><span class="line">	name: &#123;</span><br><span class="line">		<span class="hljs-built_in">type</span>: String,</span><br><span class="line">		required: <span class="hljs-literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	email: &#123;</span><br><span class="line">		<span class="hljs-built_in">type</span>: String,</span><br><span class="line">		required: <span class="hljs-literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	password: &#123;</span><br><span class="line">		<span class="hljs-built_in">type</span>: String,</span><br><span class="line">		required: <span class="hljs-literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	avatar: &#123;</span><br><span class="line">		<span class="hljs-built_in">type</span>: String</span><br><span class="line">	&#125;,</span><br><span class="line">	identity: &#123;</span><br><span class="line">		<span class="hljs-built_in">type</span>: String,</span><br><span class="line">		required: <span class="hljs-literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	data: &#123;</span><br><span class="line">		<span class="hljs-built_in">type</span>: Date,</span><br><span class="line">		default: Date.now</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = User = mongoose.model(<span class="hljs-string">'users'</span>, UserSchema);</span><br></pre></td></tr></table></figure>
@@ -284,7 +284,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Entradas
+                        Posts
                     </p>
                     <p class="title has-text-weight-normal">
                         3
@@ -294,7 +294,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Categorias
+                        Categories
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -304,7 +304,7 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Etiquetas
+                        Tags
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -314,7 +314,7 @@
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://blog.csdn.net/qq_14863671">
-                SEGUIR</a>
+                Follow</a>
         </div>
         
         
@@ -356,7 +356,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Categories
             </h3>
             <ul class="menu-list">
             
@@ -374,7 +374,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
         
         <article class="media">
@@ -442,7 +442,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -477,7 +477,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
                 
@@ -500,7 +500,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
         
         <article class="media">
@@ -568,7 +568,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
         
@@ -603,7 +603,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
                 
@@ -821,10 +821,10 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
+                POSTS: 'Posts',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
