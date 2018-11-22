@@ -119,6 +119,76 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-22T06:26:47.303Z">2018-11-22</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 704 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/11/22/redux简易demo/">redux简易demo</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="demo-简介"><a href="#demo-简介" class="headerlink" title="demo 简介"></a>demo 简介</h2><p>通过组件的事件改变 store 中的 state 值，进而改变视图，同时通过调用接口来渲染数据。地址：[<a href="https://github.com/MaTonna/demoForRedux]">https://github.com/MaTonna/demoForRedux]</a></p>
+<h2 id="使用的依赖"><a href="#使用的依赖" class="headerlink" title="使用的依赖"></a>使用的依赖</h2><ul>
+<li>react-redux：管理 react 当中的 state，创建一个集中管理的 store</li>
+<li>redux-thunk： redux 的中间件，使 action 返回一个函数，组件派发事件时可以做一些处理</li>
+<li>axios：HTTP 库，创建 http 请求</li>
+<li>immutable|redux-immutable： 用于返回新的 state，在 reducer 中用到（不允许修改传递过来的 state）</li>
+<li>styled-components：写组件样式的库，把每个元素当作组件来写，方便统一组件样式</li>
+</ul>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p><img src="/img/content/redux-content.png" alt="目录结构"></p>
+<h2 id="redux-flow-思路"><a href="#redux-flow-思路" class="headerlink" title="redux flow 思路"></a>redux flow 思路</h2><p><img src="/img/content/reduxFlow.png" alt="redux flow"></p>
+<h3 id="创建-store，整合-reducer"><a href="#创建-store，整合-reducer" class="headerlink" title="创建 store，整合 reducer"></a>创建 store，整合 reducer</h3><ol>
+<li>在入口 index.js 内引入 APP.js 和用 styled-components 创建的 reset.css</li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//index.js中</span><br><span class="line">import &#123; GlobalStyle &#125; from <span class="hljs-string">'./style'</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;App&gt;</span><br><span class="line">    &lt;GlobalStyle /&gt;</span><br><span class="line">  &lt;/App&gt;,</span><br><span class="line">  document.getElementById(<span class="hljs-string">'root'</span>)</span><br><span class="line">);</span><br><span class="line">// style.js</span><br><span class="line">import &#123; createGlobalStyle &#125; from <span class="hljs-string">'styled-components'</span>;</span><br><span class="line"><span class="hljs-built_in">export</span> const GlobalStyle = createGlobalStyle`reset.css的内容`</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 store.js 中引入 redux-thunk 作为中间件，在创建 store 时，加入 reducer 来处理 action</li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createStore, compose, applyMiddleware &#125; from <span class="hljs-string">'redux'</span>;</span><br><span class="line">import reducer from <span class="hljs-string">'./reducer'</span>;</span><br><span class="line">import thunk from <span class="hljs-string">'redux-thunk'</span>;</span><br><span class="line"></span><br><span class="line">const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;</span><br><span class="line">const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));</span><br><span class="line"><span class="hljs-built_in">export</span> default store;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在统一的 reducer 中使用 redux-immutable 的 combineReducers 来整合各个组件的 reducer</li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; combineReducers &#125; from <span class="hljs-string">'redux-immutable'</span>;</span><br><span class="line">import &#123; reducer as headerReducer &#125; from <span class="hljs-string">'../common/header/store'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">export</span> default combineReducers(&#123;</span><br><span class="line">  header: headerReducer</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>在 APP.js 内引入 store， 使用 react-redux 的 Provider 将 state 传入组件</li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from <span class="hljs-string">'react'</span>;</span><br><span class="line">import &#123; Provider &#125; from <span class="hljs-string">'react-redux'</span>;</span><br><span class="line">import Header from <span class="hljs-string">'./common/header'</span>;</span><br><span class="line">import store from <span class="hljs-string">'./store'</span>;</span><br><span class="line"></span><br><span class="line">class App extends Component &#123;</span><br><span class="line">  <span class="hljs-function"><span class="hljs-title">render</span></span>() &#123;</span><br><span class="line">    <span class="hljs-built_in">return</span> (</span><br><span class="line">      &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">        &lt;Header /&gt;</span><br><span class="line">      &lt;/Provider&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-built_in">export</span> default App;</span><br></pre></td></tr></table></figure>
+<h3 id="在组件中创建自己的-reducer，并派发-action"><a href="#在组件中创建自己的-reducer，并派发-action" class="headerlink" title="在组件中创建自己的 reducer，并派发 action"></a>在组件中创建自己的 reducer，并派发 action</h3><ol>
+<li>创建组件自己的 reducer 和 actionCreator</li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//reducer.js</span><br><span class="line">import &#123; fromJS &#125; from <span class="hljs-string">'immutable'</span>;</span><br><span class="line"></span><br><span class="line">// 转化为immutable类型数据</span><br><span class="line">const defaultState = fromJS(&#123;</span><br><span class="line">  focused: <span class="hljs-literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line">// 默认导出一个函数，接收state和action作为参数</span><br><span class="line"><span class="hljs-built_in">export</span> default (state = defaultState, action) =&gt; &#123;</span><br><span class="line">    //通过接收action.type，来定义不同action的处理方式，例如：</span><br><span class="line">    <span class="hljs-keyword">if</span>(action.type === <span class="hljs-string">'SEARCH_FOCUS'</span>) &#123;</span><br><span class="line">      //改变state的值并返回一个新的state，触发了组件里的props的变化</span><br><span class="line">      <span class="hljs-built_in">return</span> state.set(<span class="hljs-string">'focused'</span>, <span class="hljs-literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">//actionCreator.js</span><br><span class="line">import axios from <span class="hljs-string">'axios'</span>;</span><br><span class="line">import &#123; fromJS &#125; from <span class="hljs-string">'immutable'</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">export</span> const searchFocus = () =&gt; (&#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: <span class="hljs-string">'SEARCH_FOCUS'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在组件中使用 react-redux 中的 connect 连接 APP.js 的 store，connect 中传入 mapStateToProps 和 mapDispatchToProps，作用分别为映射 store 中的 state 到组件的 props 里，和派发事件的 action</li>
+</ol>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from <span class="hljs-string">'react'</span>;</span><br><span class="line">import &#123; connect &#125; from <span class="hljs-string">'react-redux'</span>;</span><br><span class="line">import &#123; HearderWrapper, SearchInput &#125; from <span class="hljs-string">'./style'</span>;</span><br><span class="line">//store的index.js中<span class="hljs-built_in">export</span> &#123; reducer, actionCreators &#125;</span><br><span class="line">import &#123; actionCreators &#125; from <span class="hljs-string">'./store'</span>;</span><br><span class="line"></span><br><span class="line">class Hearder extends Component &#123;</span><br><span class="line">  <span class="hljs-function"><span class="hljs-title">render</span></span>() &#123;</span><br><span class="line">    const &#123; focused, handlerInputFocus, handlerInputBlur &#125; = this.props;</span><br><span class="line">    <span class="hljs-built_in">return</span> (</span><br><span class="line">      &lt;HearderWrapper&gt;</span><br><span class="line">        //使用connect做了一个绑定</span><br><span class="line">        //这里的this.props.handlerInputFocus/focused就是mapDispatchToProps里的handlerInputFocus/focused</span><br><span class="line">        &lt;SearchInput className=&#123;focused ? <span class="hljs-string">'focus'</span> : <span class="hljs-string">'blur'</span>&#125; onFocus=&#123;handlerInputFocus&#125;/&gt;</span><br><span class="line">      &lt;/HearderWrapper&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">const mapStateToProps = state =&gt; &#123;</span><br><span class="line">  <span class="hljs-built_in">return</span> &#123;</span><br><span class="line">    focused: state.getIn([<span class="hljs-string">'header'</span>, <span class="hljs-string">'focused'</span>]),</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = dispatch =&gt; &#123;</span><br><span class="line">  <span class="hljs-built_in">return</span> &#123;</span><br><span class="line">    //发生事件时派发actionCreator</span><br><span class="line">    <span class="hljs-function"><span class="hljs-title">handlerInputFocus</span></span>() &#123;</span><br><span class="line">      dispatch(actionCreators.searchFocus());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 容器组件-负责处理数据逻辑</span><br><span class="line"><span class="hljs-built_in">export</span> default connect(</span><br><span class="line">  mapStateToProps,</span><br><span class="line">  mapDispatchToProps</span><br><span class="line">)(Hearder);</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-11-02T09:08:47.875Z">2018-11-02</time>
                 
                 
@@ -288,7 +358,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        4
                     </p>
                 </div>
             </div>
@@ -380,6 +450,25 @@
         
         <article class="media">
             
+            <a href="/2018/11/22/redux简易demo/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="redux简易demo">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-22T06:26:47.303Z">2018-11-22</time></div>
+                    <a href="/2018/11/22/redux简易demo/" class="has-link-black-ter is-size-6">redux简易demo</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="express+mlab登录注册">
@@ -453,7 +542,7 @@
                     <span class="level-item">November 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -503,6 +592,25 @@
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/22/redux简易demo/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="redux简易demo">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-22T06:26:47.303Z">2018-11-22</time></div>
+                    <a href="/2018/11/22/redux简易demo/" class="has-link-black-ter is-size-6">redux简易demo</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -579,7 +687,7 @@
                     <span class="level-item">November 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
