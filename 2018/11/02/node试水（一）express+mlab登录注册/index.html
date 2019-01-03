@@ -8,7 +8,7 @@
 
 
     <meta name="description" content="简介和思路 使用express作为node框架，mlab作线上数据库，postman作为调试接口工具； 注册时匹配唯一邮箱，录入用户名、密码（用bcrypt加密过）、邮箱、头像（获取gravatar公认头像），保存数据库成功后返回用户信息； 登录时匹配用户名和密码，匹配成功后返回Bearer token令牌； 访问一个接口，校验传入的authorization是否和登录时的token匹配，匹配通过">
-<meta name="keywords" content="blog">
+<meta name="keywords" content="node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="express+mlab登录注册">
 <meta property="og:url" content="http://yoursite.com/2018/11/02/node试水（一）express+mlab登录注册/index.html">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/img/content/5.png">
 <meta property="og:image" content="http://yoursite.com/img/content/6.png">
 <meta property="og:image" content="http://yoursite.com/img/content/7.png">
-<meta property="og:updated_time" content="2018-11-07T04:21:56.822Z">
+<meta property="og:updated_time" content="2019-01-03T03:54:01.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="express+mlab登录注册">
 <meta name="twitter:description" content="简介和思路 使用express作为node框架，mlab作线上数据库，postman作为调试接口工具； 注册时匹配唯一邮箱，录入用户名、密码（用bcrypt加密过）、邮箱、头像（获取gravatar公认头像），保存数据库成功后返回用户信息； 登录时匹配用户名和密码，匹配成功后返回Bearer token令牌； 访问一个接口，校验传入的authorization是否和登录时的token匹配，匹配通过">
@@ -132,6 +132,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-11-02T09:08:47.875Z">2018-11-02</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/前端/">前端</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -173,6 +177,15 @@
 <h3 id="User-js"><a href="#User-js" class="headerlink" title="User.js"></a>User.js</h3><p>功能：配置mongoose的模型<br><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">const mongoose = require(<span class="hljs-string">'mongoose'</span>);</span><br><span class="line">const Schema = mongoose.Schema;</span><br><span class="line"></span><br><span class="line">// 创建模型和所需要的字段</span><br><span class="line">const UserSchema = new Schema(&#123;</span><br><span class="line"> name: &#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: String,</span><br><span class="line">  required: <span class="hljs-literal">true</span></span><br><span class="line"> &#125;,</span><br><span class="line"> email: &#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: String,</span><br><span class="line">  required: <span class="hljs-literal">true</span></span><br><span class="line"> &#125;,</span><br><span class="line"> password: &#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: String,</span><br><span class="line">  required: <span class="hljs-literal">true</span></span><br><span class="line"> &#125;,</span><br><span class="line"> avatar: &#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: String</span><br><span class="line"> &#125;,</span><br><span class="line"> identity: &#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: String,</span><br><span class="line">  required: <span class="hljs-literal">true</span></span><br><span class="line"> &#125;,</span><br><span class="line"> data: &#123;</span><br><span class="line">  <span class="hljs-built_in">type</span>: Date,</span><br><span class="line">  default: Date.now</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = User = mongoose.model(<span class="hljs-string">'users'</span>, UserSchema);</span><br></pre></td></tr></table></figure></p>
 <h3 id="passport-js"><a href="#passport-js" class="headerlink" title="passport.js"></a>passport.js</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">const JwtStrategy = require(<span class="hljs-string">'passport-jwt'</span>).Strategy,</span><br><span class="line"> ExtractJwt = require(<span class="hljs-string">'passport-jwt'</span>).ExtractJwt;</span><br><span class="line">const mongoose = require(<span class="hljs-string">'mongoose'</span>);</span><br><span class="line">const User = mongoose.model(<span class="hljs-string">'users'</span>);</span><br><span class="line">const keys = require(<span class="hljs-string">'../config/keys'</span>);</span><br><span class="line"></span><br><span class="line">const opts = &#123;&#125;;</span><br><span class="line">opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();</span><br><span class="line">opts.secretOrKey = keys.secretOrKey;</span><br><span class="line"></span><br><span class="line">// passport验证token</span><br><span class="line">module.exports = passport =&gt; &#123;</span><br><span class="line"> passport.use(</span><br><span class="line">  new JwtStrategy(opts, (jwt_payload, <span class="hljs-keyword">done</span>) =&gt; &#123;</span><br><span class="line">   User.findById(jwt_payload.id)</span><br><span class="line">    .<span class="hljs-keyword">then</span>(user =&gt; &#123;</span><br><span class="line">     <span class="hljs-keyword">if</span> (user) &#123;</span><br><span class="line">      <span class="hljs-built_in">return</span> <span class="hljs-keyword">done</span>(null, user);</span><br><span class="line">     &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      <span class="hljs-built_in">return</span> <span class="hljs-keyword">done</span>(null, <span class="hljs-literal">false</span>);</span><br><span class="line">     &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(err =&gt; &#123;</span><br><span class="line">     console.log(err);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line"> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="keys-js"><a href="#keys-js" class="headerlink" title="keys.js"></a>keys.js</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line"> mongoURL: <span class="hljs-string">'mongodb://manager-web:twj123456@ds147233.mlab.com:47233/resful-api-prod'</span>,</span><br><span class="line"> secretOrKey: <span class="hljs-string">'secret'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/node/">node</a>
+                </div>
+            </div>
         </div>
         
         
@@ -236,37 +249,37 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">
-                        Entradas
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        5
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        3
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">
+                        Tags
                     </p>
                     <p class="title has-text-weight-normal">
                         4
                     </p>
                 </div>
             </div>
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">
-                        Categorias
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered">
-                <div>
-                    <p class="heading">
-                        Etiquetas
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
-                </div>
-            </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://blog.csdn.net/qq_14863671">
-                SEGUIR</a>
+                Follow</a>
         </div>
         
         
@@ -308,16 +321,49 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Categories
             </h3>
             <ul class="menu-list">
-            
+            <li>
+        <a class="level is-marginless" href="/categories/tips/">
+            <span class="level-start">
+                <span class="level-item">tips</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/前端/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/年度总结/">
+            <span class="level-start">
+                <span class="level-item">年度总结</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
             </ul>
         </div>
     </div>
 </div>
     
         
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/个人总结/" style="font-size: 10px;">个人总结</a>
+    </div>
+</div>
+
     
     
         <div class="card card-transparent is-hidden-widescreen">
@@ -326,8 +372,27 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/01/03/2018年度总结-工作篇/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2018年度总结-工作篇">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-03T06:16:27.188Z">2019-01-03</time></div>
+                    <a href="/2019/01/03/2018年度总结-工作篇/" class="has-link-black-ter is-size-6">2018年度总结-工作篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/年度总结/">年度总结</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -342,7 +407,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-22T06:26:47.303Z">2018-11-22</time></div>
                     <a href="/2018/11/22/redux简易demo/" class="has-link-black-ter is-size-6">redux简易demo</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/前端/">前端</a>
                     </p>
                 </div>
             </div>
@@ -361,7 +426,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-02T09:08:47.875Z">2018-11-02</time></div>
                     <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="has-link-black-ter is-size-6">express+mlab登录注册</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/前端/">前端</a>
                     </p>
                 </div>
             </div>
@@ -380,7 +445,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T11:20:27.337Z">2018-10-24</time></div>
                     <a href="/2018/10/24/base64 转 blob 通用方法/" class="has-link-black-ter is-size-6">base64 转 blob 通用方法</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/tips/">tips</a>
                     </p>
                 </div>
             </div>
@@ -399,7 +464,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T08:41:13.231Z">2018-10-24</time></div>
                     <a href="/2018/10/24/vue监听多个data值变化/" class="has-link-black-ter is-size-6">vue监听多个data值变化</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/tips/">tips</a>
                     </p>
                 </div>
             </div>
@@ -413,9 +478,20 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/11/">
@@ -448,9 +524,53 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/node/">
+                        <span class="level-start">
+                            <span class="level-item">node</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/redux/">
+                        <span class="level-start">
+                            <span class="level-item">redux</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/vue/">
+                        <span class="level-start">
+                            <span class="level-item">vue</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/个人总结/">
+                        <span class="level-start">
+                            <span class="level-item">个人总结</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
                 
             </ul>
         </div>
@@ -471,8 +591,27 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/01/03/2018年度总结-工作篇/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="2018年度总结-工作篇">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-03T06:16:27.188Z">2019-01-03</time></div>
+                    <a href="/2019/01/03/2018年度总结-工作篇/" class="has-link-black-ter is-size-6">2018年度总结-工作篇</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/年度总结/">年度总结</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -487,7 +626,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-22T06:26:47.303Z">2018-11-22</time></div>
                     <a href="/2018/11/22/redux简易demo/" class="has-link-black-ter is-size-6">redux简易demo</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/前端/">前端</a>
                     </p>
                 </div>
             </div>
@@ -506,7 +645,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-02T09:08:47.875Z">2018-11-02</time></div>
                     <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="has-link-black-ter is-size-6">express+mlab登录注册</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/前端/">前端</a>
                     </p>
                 </div>
             </div>
@@ -525,7 +664,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T11:20:27.337Z">2018-10-24</time></div>
                     <a href="/2018/10/24/base64 转 blob 通用方法/" class="has-link-black-ter is-size-6">base64 转 blob 通用方法</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/tips/">tips</a>
                     </p>
                 </div>
             </div>
@@ -544,7 +683,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T08:41:13.231Z">2018-10-24</time></div>
                     <a href="/2018/10/24/vue监听多个data值变化/" class="has-link-black-ter is-size-6">vue监听多个data值变化</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/tips/">tips</a>
                     </p>
                 </div>
             </div>
@@ -558,9 +697,20 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/11/">
@@ -593,9 +743,53 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                Tags
             </h3>
             <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/node/">
+                        <span class="level-start">
+                            <span class="level-item">node</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/redux/">
+                        <span class="level-start">
+                            <span class="level-item">redux</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/vue/">
+                        <span class="level-start">
+                            <span class="level-item">vue</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/个人总结/">
+                        <span class="level-start">
+                            <span class="level-item">个人总结</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
                 
             </ul>
         </div>
@@ -618,7 +812,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2018 MaTonna
+                &copy; 2019 MaTonna
                 <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
                         href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a> -->
                 </p>
@@ -811,10 +1005,10 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
+                POSTS: 'Posts',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
