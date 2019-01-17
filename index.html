@@ -129,7 +129,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 minutes read (About 2010 words)
+                    14 minutes read (About 2038 words)
                 </span>
                 
             </div>
@@ -176,7 +176,8 @@
 <ul>
 <li>其他的运算符：<br>&#160; &#160; &#160; &#160;只要其中一方是数字，另一方就转为数字</li>
 </ul>
-<p><strong>注：如果{}被放在运算符最前面，会当做代码块处理,如果{}被放在运算中，那么他首先会调用 toString 方法</strong><br><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; + [] =&gt; 0</span><br><span class="line">[] + &#123;&#125; =&gt; &quot;[object Object]&quot;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注：如果{}被放在运算符最前面，会当做代码块处理,如果{}被放在运算中，那么他首先会调用 toString 方法</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; + [] =&gt; 0</span><br><span class="line">[] + &#123;&#125; =&gt; &quot;[object Object]&quot;</span><br></pre></td></tr></table></figure>
 <h3 id="3-比较运算符"><a href="#3-比较运算符" class="headerlink" title="3.比较运算符"></a>3.比较运算符</h3><p>&#160; &#160; &#160; &#160;如果是对象，通过 toPrimitive 转换对象，具体调用规则看上面的类型转换<br>&#160; &#160; &#160; &#160;如果是字符串，通过 unicode 字符索引来比较</p>
 <h3 id="4-this"><a href="#4-this" class="headerlink" title="4.this"></a>4.this</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：如何正确判断 this？箭头函数的 this 是什么？</strong></p>
 <p>&#160; &#160; &#160; &#160;箭头函数没有 this，箭头函数中的 this 取决于包裹箭头函数的第一个普通函数的 this，就不能用过构造函数。<br>&#160; &#160; &#160; &#160;谁调用了函数，谁就是 this。多个 this 同时出现的情况下，this 的优先级：new foo() &gt; foo.bind() &gt; obj.foo() &gt; foo()<br><img src="/img/content/this.png" alt="单个规则的this"></p>
@@ -229,7 +230,7 @@
 </ul>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(obj) &#123;</span><br><span class="line">  function isObject(o) &#123;</span><br><span class="line">    return (typeof o === &apos;object&apos; || typeof o === &apos;function&apos;) &amp;&amp; o !== null</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (!isObject(obj)) &#123;</span><br><span class="line">    throw new Error(&apos;非对象&apos;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let isArray = Array.isArray(obj)</span><br><span class="line">  let newObj = isArray ? [...obj] : &#123; ...obj &#125;</span><br><span class="line">  //Reflect.ownKeys返回所有属性key,Object.keys()返回属性key，但不包括方法属性</span><br><span class="line">  Reflect.ownKeys(newObj).forEach(key =&gt; &#123;</span><br><span class="line">    newObj[key] = isObject(obj[key]) ? deepClone(obj[key]) : obj[key]</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  return newObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="7-原型"><a href="#7-原型" class="headerlink" title="7. 原型"></a>7. 原型</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：如何理解原型？如何理解原型链？</strong></p>
-<p>&#160; &#160; &#160; &#160;每个 JS 对象都有<strong>proto</strong>属性，这个属性实际上是个对象，这个属性指向原型，是为了让我们访问到内部属性 [[prototype]] 。原型的 constructor 属性指向构造函数，构造函数又通过 prototype 属性指回原型。<br>&#160; &#160; &#160; &#160;原型链就是多个对象通过<strong>proto</strong>的方式连接了起来，obj 可以访问 valueOf 就是因为 obj 通过原型链找到 Object，从而找到了 valueOf 函数。</p>
+<p>&#160; &#160; &#160; &#160;每个 JS 对象都有<strong>proto</strong>属性，这个属性实际上是个对象，这个属性指向原型，是为了让我们访问到内部属性 [[prototype]] 。原型的 constructor 属性指向构造函数，构造函数又通过 prototype 属性指回原型。<br>&#160; &#160; &#160; &#160;原型链就是多个对象通过<strong>proto</strong>的方式连接了起来，obj 可以访问 valueOf 就是因为 obj 通过原型链找到 Object，从而找到了 valueOf 函数，一个类型的原型对象等于另一个类型的实例，伪代码 Subtype.prototype = new SuperType()。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__proto__ :&#123;</span><br><span class="line">  constructor:&#123;       //constructor指向下面的原型</span><br><span class="line">    prototype:&#123;       //原型的constructor指向构造函数</span><br><span class="line">      constructor:&#123;   //构造函数又通过prototype指向原型</span><br><span class="line">        prototype...  //形成原型链</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
