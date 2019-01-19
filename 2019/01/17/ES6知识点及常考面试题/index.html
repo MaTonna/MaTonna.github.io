@@ -2,19 +2,23 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>标签: 个人总结 - MaTonna&#39;s blog</title>
+<title>ES6知识点及常考面试题 - MaTonna&#39;s blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="keywords" content="blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MaTonna&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/个人总结/index.html">
+    <meta name="description" content="1. var、let 及 const 区别&amp;#160; &amp;#160; &amp;#160; &amp;#160;面试题：什么是提升？什么是暂时性死区？var、let 及 const 区别？ &amp;#160; &amp;#160; &amp;#160; &amp;#160;在变量声明之前使用变量叫做变量提升，并且提升的是声明，使用 var 声明的变量会被提升到作用域的顶部。 1234567var a = 10;var a ;console.l">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6知识点及常考面试题">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/ES6知识点及常考面试题/index.html">
 <meta property="og:site_name" content="MaTonna&#39;s blog">
+<meta property="og:description" content="1. var、let 及 const 区别&amp;#160; &amp;#160; &amp;#160; &amp;#160;面试题：什么是提升？什么是暂时性死区？var、let 及 const 区别？ &amp;#160; &amp;#160; &amp;#160; &amp;#160;在变量声明之前使用变量叫做变量提升，并且提升的是声明，使用 var 声明的变量会被提升到作用域的顶部。 1234567var a = 10;var a ;console.l">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-17T08:16:20.017Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MaTonna&#39;s blog">
+<meta name="twitter:title" content="ES6知识点及常考面试题">
+<meta name="twitter:description" content="1. var、let 及 const 区别&amp;#160; &amp;#160; &amp;#160; &amp;#160;面试题：什么是提升？什么是暂时性死区？var、let 及 const 区别？ &amp;#160; &amp;#160; &amp;#160; &amp;#160;在变量声明之前使用变量叫做变量提升，并且提升的是声明，使用 var 声明的变量会被提升到作用域的顶部。 1234567var a = 10;var a ;console.l">
 
 
 
@@ -113,33 +117,22 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">个人总结</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-03T06:16:27.188Z">2019-01-03</time>
+                <time class="level-item has-text-grey" datetime="2019-01-17T02:18:27.671Z">2019-01-17</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/年度总结/">年度总结</a>
+                <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    14 minutes read (About 2121 words)
+                    10 minutes read (About 1554 words)
                 </span>
                 
             </div>
@@ -147,41 +140,98 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/01/03/2018年度总结-工作篇/">2018年度总结-工作篇</a>
+                ES6知识点及常考面试题
             
         </h1>
         <div class="content">
-            <p>&#160; &#160; &#160; &#160;2018 年结束就代表毕业以及工作一年半了，不管是业务熟练程度还是技术掌握都有了自己感知得到的进步。回顾这一年的工作</p>
+            <h3 id="1-var、let-及-const-区别"><a href="#1-var、let-及-const-区别" class="headerlink" title="1. var、let 及 const 区别"></a>1. var、let 及 const 区别</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：什么是提升？什么是暂时性死区？var、let 及 const 区别？</strong></p>
+<p>&#160; &#160; &#160; &#160;在变量声明之前使用变量叫做变量提升，并且提升的是声明，使用 var 声明的变量会被提升到作用域的顶部。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var a ;</span><br><span class="line">console.log(a) //10</span><br><span class="line">//相当于</span><br><span class="line">var a;</span><br><span class="line">var a;</span><br><span class="line">a = 10;</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;函数也会被提升，并且优于变量提升，函数提升会把整个函数挪到作用域顶部。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">let b = 1</span><br><span class="line">const c = 1</span><br><span class="line">console.log(window.a)  // 1</span><br><span class="line">console.log(window.b)  // undefined</span><br><span class="line">console.log(window. c) // undefined</span><br><span class="line"></span><br><span class="line">function test()&#123;</span><br><span class="line">  console.log(a)</span><br><span class="line">  let a</span><br><span class="line">&#125;</span><br><span class="line">test() // 报错：a is not defined</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;总结：</p>
 <ul>
-<li>接触的浏览器平台也从 web 端，PC 软件内嵌 H5，转到了移动端，有 H5，也有 APP 内嵌 H5，还有微信公众号平台，bug 也各不相同</li>
-<li>使用的库也从 jquery 转向了 vue+vant 和 react+antd</li>
-<li>做的产品也有面向用户、面向销售以及面向内部人员</li>
-<li>写的项目也从简单的后台管理系统到对外客户使用的复杂项目，还有复杂的管理后台系统，抽奖、火箭逐帧动画</li>
-<li><p>从只会跟着 PRD 写页面调接口，到自己写一套商城系统，到自己从头主导构建小项目<br>&#160; &#160; &#160; &#160;以上这些都是今年工作上的进步。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;除了明显的代码效率和质量上的提高，还有一些心态上的转变，之前很惧怕学习和写 react 项目，担心会因为自己的不熟悉拖延项目进度和降低整体的代码质量，后来由于任务分配而不得不接受要去学习 react 使用的事实（其实一部分是很不喜欢把 html 也写到 js 里，代码整体显得很冗余和笨重）。其实通过组件化来管理自己负责的模块是非常得益的，通过把代码按照模块拆分来其实也降低了复杂度，并且能让自己理清有时非常绕和复杂的需求。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;学习的过程非常枯燥和纠结，一方面和自己已掌握的库对比好像又懂了，一方面怀疑自己只会皮毛和简单的使用而不是真正懂他的原理和流程。例如前段时间学习了 redux（博客里有一篇简易的 demo），其实官方的教程有点不是很好理解，然后去找了相关的视频，跟着学习和实践了一次，但是只是单纯的会用，并且记不得调用的过程（只记得简单的应该要建一个 store，然后通过 dispatch 去调用 reducer 里的方法来改变 store 里的值，各个组件通过 connect 共享同一份 store 里的数据，相当于共同的 state，但是并不记得应该如何创建和调用这些流程，每次要写都要去翻之前的代码和教程），后来下定决心搞懂这个 redux 的流程，翻了很多别人的示意图结合之前看的视频，自己画了一个 redux flow 图，这个过程让我想清楚了他的工作流程。并不是说单纯的学到了这个知识点，而是意识到了之前自己的学习方式只是很松散的了解或者使用了一个知识，我也可以认真的去钻研一个点，能够用自己的话讲解并且讲明白这个东西才是真正的懂了。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;学习 redux 过了几个礼拜，刚好有个新项目需要我主导负责，并且也负责一整块的需求，其中一个需求是一个带有分组的菜单栏，菜单栏中可以修改分组名，点击展示内容，内容中也可以修改分组和菜单名，我拆分成了几个组件，相互之间传参回调之间特别麻烦，就想改造成 redux 统一管理菜单的信息，之前项目惯例使用 dva，有了前段时间 redux 的知识储备，上手就变得比较简单了，改造起来效率也非常高，还是很有成就感的。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;关于负责一个小的新项目，还是有一些感触的。项目在过需求和项目开始之间的空档期，需要考虑技术选型和写基本的公共方法和样式，由于新项目是个数据服务系统，之前参与过别的类似项目，也是沿用之前的那一套 react+antd，但是基本的菜单栏和公共导航是需要自己写的，需要考虑需求和公共部分是否有联系，比如，点击导航如何显示切换页面；菜单栏收起时是否需要在 basicLayout 里传回调，告诉 children 现在的收起状态；还有哪些组件或者样式是可以共用的等等。除了前端几个成员的配合之外，还要和后端和产品的配合，有哪些需求可以更改，哪些可以通过前端自己实现，哪些需要调接口，实现方式是什么，都需要进行商讨，初步了解了对项目整体的一个把控。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;由于需要对项目负责，所以要负责给前端伙伴解决一些问题，有别的项目介入，需要分摊时也要接手写了一半的代码，还要解决别人的 bug 和关于公共部分的使用问题，解决别人的 bug 和接手代码都是很需要耐心的事情，也很有技术含量，需要了解别人的具体业务逻辑和 bug 出现场景来推断原因，有些也不是逻辑问题，可能是生命周期和 API 不是很熟练，可以从别人的代码里学到一些技巧和吸取一些教训，是开心和暴躁的体验。接管的话代码风格不同，所以需要重构一下，按照自己的风格去拆分功能，过程是很痛苦的，结果是很有成就的。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;还有对一个复杂业务逻辑的思考。由于工作性质，基本上都是用键盘来写字，但是有时候需要静下来仔细思考，用本子和笔来画思路流程，这是个很好的整理思路的方式。比如今年做的一个滚轮抽奖动画，有用户展示端和发起端，思路</p>
-</li>
-<li><p>发起端流程有：开始按钮-&gt;开始抽奖动画，3s 倒计时，按钮 disabled-&gt;动画停，停止在中奖人处，开始按钮可点击-&gt;抽奖次数结束后按钮消失</p>
-</li>
-<li>动画方面：展示框可显示七条抽奖人，动画滚动 2.5s 后最后一次滚动将中奖人放在中间，动画由快变慢最后停止</li>
-<li>数据处理方面：抽奖人少于七人时，重复抽奖人为七人，正常情况下，每一次滚动都截取抽奖人数组的七段，到了末尾再从头截取</li>
-<li><p>调接口方面：一进入展示框就查询所有的抽奖人，点击时调用开始接口，动画停止前查询本轮中奖人并查询是否是最后一次抽奖…等等<br>&#160; &#160; &#160; &#160;诸如此类的复杂需求可以循序渐进分类整理自己的思路。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;以上是 2018 的一些教训和总结，如果有想到再接着补充。以下是对今年 2019 的学习展望。<br>&nbsp;</p>
-</li>
-<li><p>对 ES6 学习的巩固，尤其是块级作用域、函数、数据类型及其方法、迭代器、类、promise、代理反射、模块化进行学习实践，学会项目中常见的处理方法</p>
-</li>
-<li>MVVM 的原理学习，对 vdom、双向绑定、渲染机制有自己的理解，目标是做一个简单的实现</li>
-<li>HTTP 方面，有深层次一点的了解</li>
-<li>typescript，在学习的基础上，在项目中有稍微复杂一点的实践</li>
-<li><p>拓展类：hybrid，node，数据可视化<br>&#160; &#160; &#160; &#160;具体的计划视情况而定进行调整。<br>&nbsp;</p>
-<p>&#160; &#160; &#160; &#160;末：希望 2019 还是元气满满的学习和工作，不要轻易放弃呀。</p>
-</li>
+<li>let 和 const 存在暂时性死区，不能在声明前使用变量</li>
+<li>在全局作用域下使用 let 和 const 声明变量，变量不会被挂载到 window 上</li>
+<li>let 和 const 声明变量使用的是块作用域</li>
+<li>let 和 const 不允许重复定义</li>
+<li>let 在循环中引入了新的环境变量，针对每次迭代都会创建新的作用域</li>
+<li>const 声明的变量不能再次赋值</li>
 </ul>
+<h3 id="2-原型继承和-class-继承"><a href="#2-原型继承和-class-继承" class="headerlink" title="2. 原型继承和 class 继承"></a>2. 原型继承和 class 继承</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：原型如何实现继承？Class 如何实现继承？Class 本质是什么？</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//父类</span><br><span class="line">function Parent(value) &#123;</span><br><span class="line">  this.val = value;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.getValue = function() &#123;</span><br><span class="line">  console.log(this.val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>组合继承</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Child(value) &#123;</span><br><span class="line">  Parent.call(this, value); //在子类的构造函数中继承父类的属性</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = new Parent(); //改变子类的原型为new Parent()来继承父类的函数</span><br><span class="line">const child = new Child(1);</span><br><span class="line"></span><br><span class="line">child.getValue(); // 1</span><br><span class="line">child instanceof Parent // true</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;缺点：继承父类函数时调用了父类构造函数，导致子类的原型上多了不需要的父类属性，内存上存在浪费。</p>
+<ul>
+<li>寄生组合继承</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Child(value) &#123;</span><br><span class="line">  Parent.call(this, value);</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = Object.create(Parent.prototype, &#123;</span><br><span class="line">  constructor:&#123;</span><br><span class="line">    value: Child, // 将父类的原型赋给子类，将构造函数设置为子类</span><br><span class="line">    enumerable: false,</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>class 继承</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Child extends Parent &#123;</span><br><span class="line">  constructor(value) &#123;</span><br><span class="line">    super(value); // 必须调用，继承父类属性，相当于Parent.call(this, value)</span><br><span class="line">    this.val = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;class 本质是函数，JS 中并不存在类</p>
+<h3 id="3-模块化"><a href="#3-模块化" class="headerlink" title="3. 模块化"></a>3. 模块化</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？</strong></p>
+<p>&#160; &#160; &#160; &#160;优点：解决命名冲突、提供复用性、提高代码可维护性<br>&#160; &#160; &#160; &#160;实现模块化的方式：</p>
+<ul>
+<li>立即执行函数</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function(globalVariable) &#123;</span><br><span class="line">  // 声明各种变量、函数都不会污染全局作用域</span><br><span class="line">&#125;)(globalVariable)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>AMD/CMD</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// AMD</span><br><span class="line">define([&apos;./a&apos;, &apos;./b&apos;], function(a, b) &#123;</span><br><span class="line">  // 加载模块完毕可以使用</span><br><span class="line">  a.do()</span><br><span class="line">  b.do()</span><br><span class="line">&#125;)</span><br><span class="line">// CMD</span><br><span class="line">define(function(require, exports, module) &#123;</span><br><span class="line">  // 加载模块</span><br><span class="line">  // 可以把 require 写在函数体的任意地方实现延迟加载</span><br><span class="line">  var a = require(&apos;./a&apos;)</span><br><span class="line">  a.doSomething()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CommonJS</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  a: 1</span><br><span class="line">&#125;</span><br><span class="line">// or</span><br><span class="line">exports.a = 1</span><br><span class="line"></span><br><span class="line">// b.js</span><br><span class="line">var module = require(&apos;./a.js&apos;)</span><br><span class="line">module.a // -&gt; log 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ES Module</li>
+</ul>
+<ol>
+<li>异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响</li>
+<li>采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化</li>
+<li>会编译成 require/exports 来执行的</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 引入模块 API</span><br><span class="line">import XXX from &apos;./a.js&apos;</span><br><span class="line">import &#123; XXX &#125; from &apos;./a.js&apos;</span><br><span class="line">// 导出模块 API</span><br><span class="line">export function a() &#123;&#125;</span><br><span class="line">export default function() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-Proxy"><a href="#4-Proxy" class="headerlink" title="4. Proxy"></a>4. Proxy</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：Proxy 可以实现什么功能？</strong></p>
+<p>&#160; &#160; &#160; &#160;解释：</p>
+<ol>
+<li>代理（Proxy）是一种可以拦截并改变底层 JavaScript 引擎操作的包装器，通过暴露内部运作的对象，从而可以创建内建的对象</li>
+<li>底层被拦截后会触发响应特定操作的陷阱函数</li>
+<li>反射 API 以 Reflect 对象的形式存在，Reflect 对象中的方法的默认特性和相同的底层操作保持一致，代理可以覆写这些操作，每个代理陷阱对应一个命名和参数都相同的 Reflect 方法</li>
+<li>代理和反射的关系举例：改写内置 get 方法，代理负责拦截原来的 get 方法，并触发陷阱函数修改 get 的读取属性值特性，反射就是原来的内置方法，即 Reflect.get()是之前的 get 方法<br>&#160; &#160; &#160; &#160;使用 set 陷阱验证属性：</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">let target = &#123;</span><br><span class="line">  name: &quot;target&quot;</span><br><span class="line">&#125;</span><br><span class="line">let proxy = new Proxy(target, &#123;</span><br><span class="line">  //set陷阱</span><br><span class="line">  set(trapTarget, key, value, receiver) &#123;</span><br><span class="line">    //忽略已有属性</span><br><span class="line">    if(!trapTarget.hasOwnProperty(key)) &#123;</span><br><span class="line">      if(isNaN(value)) &#123;</span><br><span class="line">        throw new TypeError(&apos;属性必须为数字&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return Reflect.set(trapTarget, key, value, receiver); //反射，用于使用内置set方法添加属性</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">proxy.count = 1; // 此时set陷阱被调用，是数字所以可以赋值</span><br><span class="line">console.log(target.count) // 1</span><br><span class="line">proxy.name = &apos;proxy&apos;;</span><br><span class="line">console.log(target.name) // &apos;proxy&apos;，target已有name属性，所以可以赋值</span><br><span class="line">proxy.notNumber = &apos;a&apos;; // Uncaught TypeError: 属性必须为数字，给不存在的属性赋值并且值不是数字则抛错</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;实现简单版响应式：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">let onWatch = (obj, setBind, getLogger) =&gt; &#123;</span><br><span class="line">  let handler = &#123;</span><br><span class="line">    //set陷阱</span><br><span class="line">    set(target, property, value, receiver) &#123;</span><br><span class="line">      setBind(value, property)</span><br><span class="line">      return Reflect.set(target, property, value)</span><br><span class="line">    &#125;,</span><br><span class="line">    //get陷阱</span><br><span class="line">    get(target, property, receiver) &#123;</span><br><span class="line">      getLogger(target, property)</span><br><span class="line">      return Reflect.get(target, property, receiver)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return new Proxy(obj, handler)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let obj = &#123; a: 1 &#125;</span><br><span class="line">let p = onWatch(</span><br><span class="line">  obj,</span><br><span class="line">  (v, property) =&gt; &#123;</span><br><span class="line">    console.log(`监听到属性$&#123;property&#125;改变为$&#123;v&#125;`)</span><br><span class="line">  &#125;,</span><br><span class="line">  (target, property) =&gt; &#123;</span><br><span class="line">    console.log(`&apos;$&#123;property&#125;&apos; = $&#123;target[property]&#125;`)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">p.a = 2 // 监听到属性a改变</span><br><span class="line">p.a // &apos;a&apos; = 2</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;应用举例：用 get 陷阱验证对象结构、用 has 陷阱隐藏已有属性、用 deleteProperty 陷阱防止删除属性</p>
+<h3 id="4-数组方法"><a href="#4-数组方法" class="headerlink" title="4. 数组方法"></a>4. 数组方法</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：map, filter, reduce 各自有什么作用？</strong></p>
+<ul>
+<li>map：[].map((当前索引元素，索引，原数组) =&gt; {})，遍历原数组，每个元素做相同的操作，生成一个新数组</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].map(v =&gt; v + 1) // -&gt; [2, 3, 4]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>filter：[].filter((当前索引元素，索引，原数组) =&gt; {})，遍历原数组时将返回 true 的元素放入新数组</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let newArray = [1, 2, 4, 6].filter(item =&gt; item !== 6) // [1,2,4]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>reduce：[].reduce((累计值、当前元素、当前索引、原数组) =&gt; {}, 初始值)，将数组中的元素通过回调函数最终转换为一个值</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//在一次执行回调函数时，当前值和初始值相加得出结果 1，该结果会在第二次执行回调函数时当做第一个参数传入</span><br><span class="line">const sum = [1, 2, 3].reduce((acc, current) =&gt; acc + current, 0) // 累加为6</span><br></pre></td></tr></table></figure>
 
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/面试/">面试</a>
+                </div>
+            </div>
         </div>
         
         
@@ -190,7 +240,26 @@
 </div>
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/01/19/JS 异步编程及常考面试题/">
+                <i class="level-item material-icons">keyboard_arrow_left</i>
+                <span class="level-item">JS 异步编程及常考面试题</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/01/16/JS基础知识及常考面试题/">
+                <span class="level-item">JS基础知识及常考面试题</span>
+                <i class="level-item material-icons">keyboard_arrow_right</i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>

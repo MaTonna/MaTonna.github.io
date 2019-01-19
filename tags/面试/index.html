@@ -129,6 +129,203 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-19T06:51:47.240Z">2019-01-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 952 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/19/JS 异步编程及常考面试题/">JS 异步编程及常考面试题</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-回调函数"><a href="#1-回调函数" class="headerlink" title="1. 回调函数"></a>1. 回调函数</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：回调函数有什么缺点？如何解决回调地狱问题？</strong></p>
+<p>&#160; &#160; &#160; &#160;回调容易写出回调地狱，根本问题是嵌套函数存在耦合性，一旦有所改动就会牵一发而动全身，并且嵌套函数多了会很难处理错误。回调函数不能使用 try catch 捕获错误，不能直接 return。</p>
+<p>&#160; &#160; &#160; &#160;<strong>如何解决回调地狱的问题？：用 Generator/Promise/async&amp;&amp;await 来改善。</strong></p>
+<h3 id="2-Generator"><a href="#2-Generator" class="headerlink" title="2. Generator"></a>2. Generator</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：你理解的 Generator 是什么？？</strong></p>
+<p>&#160; &#160; &#160; &#160;Generator 是生成器，一种返回迭代器（是一种特殊对象，具有一些专门为迭代过程设计的专有接口，所有的迭代器对象都有 next()方法，每次调用都会返回结果对象{value:’xxx’,done:true/false}）的函数，用处是可以控制函数的执行，通过 function 关键字后的*来表示，函数中会使用 yield 关键字。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function *foo(x) &#123;</span><br><span class="line">  let y = 2 * (yield (x + 1));</span><br><span class="line">  let z = yield (y / 3);</span><br><span class="line">  return (x + y + z);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let it = foo(5);</span><br><span class="line">console.log(it.next()); // 执行yield(x+1) =&gt; 输出&#123;value:6, done:false&#125;</span><br><span class="line">console.log(it.next(12)); // 执行yield(y/3)，传入的12是上一个yield的返回值（如果不传参数，上一个yield是undefined），即 yield(x+1) = 12 =&gt; y = 2*12 = 24; =&gt; 输出yield(y/3) = &#123;value:8, done:false&#125;</span><br><span class="line">console.log(it.next(13)); // 执行x+y+z，输入的13是yield(y/3) =&gt; z = 13 =&gt; 输出x+y+z = 5+24+13 = 42</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;使用 Generator 来解决回调地狱的问题：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function *fetch() &#123;</span><br><span class="line">  yield ajax(url1 ,() =&gt; &#123;&#125;)</span><br><span class="line">  yield ajax(url2 ,() =&gt; &#123;&#125;)</span><br><span class="line">  yield ajax(url3 ,() =&gt; &#123;&#125;)</span><br><span class="line">&#125;</span><br><span class="line">let it = fetch();</span><br><span class="line">let result1 = it.next();</span><br><span class="line">let result2 = it.next();</span><br><span class="line">let result3 = it.next();</span><br></pre></td></tr></table></figure>
+<h3 id="3-Promise"><a href="#3-Promise" class="headerlink" title="3.Promise"></a>3.Promise</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：Promise 的特点是什么，分别有什么优缺点？什么是 Promise 链？Promise 构造函数执行和 then 函数执行有什么区别？</strong></p>
+<ol>
+<li>特点和优缺点：</li>
+</ol>
+<ul>
+<li>Promise 有三种状态：等待中(pending)、完成了(resolved)、拒绝了(rejected)，一旦从等待状态变成了其他状态就不能更改状态了</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">  resolve(&apos;success&apos;)</span><br><span class="line">  reject(&apos;reject&apos;) // 无效</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在构造 Promise 的时候，构造函数内部的代码是立即执行的</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">  console.log(&apos;new Promise&apos;);</span><br><span class="line">  resolve(&apos;success&apos;);</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&apos;finish&apos;);</span><br><span class="line">// new Promise -&gt; finish</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;缺点：无法取消 Promise，错误需要通过回调函数捕获。</p>
+<ol start="2">
+<li><p>Promise 实现了链式调用，每次调用 then 之后返回一个<strong>全新的</strong>Promise（因为状态不可变），如果在 then 中使用了 return，那么 return 的值会被 Promise.resolve()包装。</p>
+</li>
+<li><p>使用 Promise 来解决回调地狱的问题：</p>
+</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ajax(url)</span><br><span class="line">  .then(res =&gt; &#123;</span><br><span class="line">      console.log(res)</span><br><span class="line">      return ajax(url1)</span><br><span class="line">  &#125;).then(res =&gt; &#123;</span><br><span class="line">      console.log(res)</span><br><span class="line">      return ajax(url2)</span><br><span class="line">  &#125;).then(res =&gt; &#123;</span><br><span class="line">    return console.log(res)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="4-async-及-await"><a href="#4-async-及-await" class="headerlink" title="4.async 及 await"></a>4.async 及 await</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：async 及 await 的特点，它们的优点和缺点分别是什么？await 原理是什么？</strong></p>
+<ul>
+<li>await 就是 generator 加上 Promise 的语法糖，且内部实现了自动执行 generator。一个函数如果加上 async，那么函数就会返回一个 Promise，async 就是将函数返回值用 RESOLVE 包裹了，和 then 中处理返回值一样，并且 await 只能配套 async 使用</li>
+<li>相比于直接使用 Promise，处理掉了 then 的调用链，优雅的解决了回调地狱的问题</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">async function test() &#123;</span><br><span class="line">  // 以下代码没有依赖性的话，完全可以使用 Promise.all 的方式</span><br><span class="line">  // 如果有依赖性的话，其实就是解决回调地狱的例子了</span><br><span class="line">  await fetch(url)</span><br><span class="line">  await fetch(url1)</span><br><span class="line">  await fetch(url2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>缺点：await 将异步代码改造成了同步代码，如果多个异步没有依赖性，使用了 await 会导致性能上的降低。(一个执行完成才会执行下一个)<br><img src="/img/content/await.png" alt="await例子"></p>
+<p>&#160; &#160; &#160; &#160;await 创建 promise，所以 await 之后的代码才是异步的。</p>
+</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-17T02:18:27.671Z">2019-01-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1554 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/17/ES6知识点及常考面试题/">ES6知识点及常考面试题</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-var、let-及-const-区别"><a href="#1-var、let-及-const-区别" class="headerlink" title="1. var、let 及 const 区别"></a>1. var、let 及 const 区别</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：什么是提升？什么是暂时性死区？var、let 及 const 区别？</strong></p>
+<p>&#160; &#160; &#160; &#160;在变量声明之前使用变量叫做变量提升，并且提升的是声明，使用 var 声明的变量会被提升到作用域的顶部。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var a ;</span><br><span class="line">console.log(a) //10</span><br><span class="line">//相当于</span><br><span class="line">var a;</span><br><span class="line">var a;</span><br><span class="line">a = 10;</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;函数也会被提升，并且优于变量提升，函数提升会把整个函数挪到作用域顶部。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">let b = 1</span><br><span class="line">const c = 1</span><br><span class="line">console.log(window.a)  // 1</span><br><span class="line">console.log(window.b)  // undefined</span><br><span class="line">console.log(window. c) // undefined</span><br><span class="line"></span><br><span class="line">function test()&#123;</span><br><span class="line">  console.log(a)</span><br><span class="line">  let a</span><br><span class="line">&#125;</span><br><span class="line">test() // 报错：a is not defined</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;总结：</p>
+<ul>
+<li>let 和 const 存在暂时性死区，不能在声明前使用变量</li>
+<li>在全局作用域下使用 let 和 const 声明变量，变量不会被挂载到 window 上</li>
+<li>let 和 const 声明变量使用的是块作用域</li>
+<li>let 和 const 不允许重复定义</li>
+<li>let 在循环中引入了新的环境变量，针对每次迭代都会创建新的作用域</li>
+<li>const 声明的变量不能再次赋值</li>
+</ul>
+<h3 id="2-原型继承和-class-继承"><a href="#2-原型继承和-class-继承" class="headerlink" title="2. 原型继承和 class 继承"></a>2. 原型继承和 class 继承</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：原型如何实现继承？Class 如何实现继承？Class 本质是什么？</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//父类</span><br><span class="line">function Parent(value) &#123;</span><br><span class="line">  this.val = value;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.getValue = function() &#123;</span><br><span class="line">  console.log(this.val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>组合继承</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Child(value) &#123;</span><br><span class="line">  Parent.call(this, value); //在子类的构造函数中继承父类的属性</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = new Parent(); //改变子类的原型为new Parent()来继承父类的函数</span><br><span class="line">const child = new Child(1);</span><br><span class="line"></span><br><span class="line">child.getValue(); // 1</span><br><span class="line">child instanceof Parent // true</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;缺点：继承父类函数时调用了父类构造函数，导致子类的原型上多了不需要的父类属性，内存上存在浪费。</p>
+<ul>
+<li>寄生组合继承</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Child(value) &#123;</span><br><span class="line">  Parent.call(this, value);</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = Object.create(Parent.prototype, &#123;</span><br><span class="line">  constructor:&#123;</span><br><span class="line">    value: Child, // 将父类的原型赋给子类，将构造函数设置为子类</span><br><span class="line">    enumerable: false,</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>class 继承</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Child extends Parent &#123;</span><br><span class="line">  constructor(value) &#123;</span><br><span class="line">    super(value); // 必须调用，继承父类属性，相当于Parent.call(this, value)</span><br><span class="line">    this.val = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;class 本质是函数，JS 中并不存在类</p>
+<h3 id="3-模块化"><a href="#3-模块化" class="headerlink" title="3. 模块化"></a>3. 模块化</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？</strong></p>
+<p>&#160; &#160; &#160; &#160;优点：解决命名冲突、提供复用性、提高代码可维护性<br>&#160; &#160; &#160; &#160;实现模块化的方式：</p>
+<ul>
+<li>立即执行函数</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function(globalVariable) &#123;</span><br><span class="line">  // 声明各种变量、函数都不会污染全局作用域</span><br><span class="line">&#125;)(globalVariable)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>AMD/CMD</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// AMD</span><br><span class="line">define([&apos;./a&apos;, &apos;./b&apos;], function(a, b) &#123;</span><br><span class="line">  // 加载模块完毕可以使用</span><br><span class="line">  a.do()</span><br><span class="line">  b.do()</span><br><span class="line">&#125;)</span><br><span class="line">// CMD</span><br><span class="line">define(function(require, exports, module) &#123;</span><br><span class="line">  // 加载模块</span><br><span class="line">  // 可以把 require 写在函数体的任意地方实现延迟加载</span><br><span class="line">  var a = require(&apos;./a&apos;)</span><br><span class="line">  a.doSomething()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CommonJS</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// a.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  a: 1</span><br><span class="line">&#125;</span><br><span class="line">// or</span><br><span class="line">exports.a = 1</span><br><span class="line"></span><br><span class="line">// b.js</span><br><span class="line">var module = require(&apos;./a.js&apos;)</span><br><span class="line">module.a // -&gt; log 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ES Module</li>
+</ul>
+<ol>
+<li>异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响</li>
+<li>采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化</li>
+<li>会编译成 require/exports 来执行的</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 引入模块 API</span><br><span class="line">import XXX from &apos;./a.js&apos;</span><br><span class="line">import &#123; XXX &#125; from &apos;./a.js&apos;</span><br><span class="line">// 导出模块 API</span><br><span class="line">export function a() &#123;&#125;</span><br><span class="line">export default function() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-Proxy"><a href="#4-Proxy" class="headerlink" title="4. Proxy"></a>4. Proxy</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：Proxy 可以实现什么功能？</strong></p>
+<p>&#160; &#160; &#160; &#160;解释：</p>
+<ol>
+<li>代理（Proxy）是一种可以拦截并改变底层 JavaScript 引擎操作的包装器，通过暴露内部运作的对象，从而可以创建内建的对象</li>
+<li>底层被拦截后会触发响应特定操作的陷阱函数</li>
+<li>反射 API 以 Reflect 对象的形式存在，Reflect 对象中的方法的默认特性和相同的底层操作保持一致，代理可以覆写这些操作，每个代理陷阱对应一个命名和参数都相同的 Reflect 方法</li>
+<li>代理和反射的关系举例：改写内置 get 方法，代理负责拦截原来的 get 方法，并触发陷阱函数修改 get 的读取属性值特性，反射就是原来的内置方法，即 Reflect.get()是之前的 get 方法<br>&#160; &#160; &#160; &#160;使用 set 陷阱验证属性：</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">let target = &#123;</span><br><span class="line">  name: &quot;target&quot;</span><br><span class="line">&#125;</span><br><span class="line">let proxy = new Proxy(target, &#123;</span><br><span class="line">  //set陷阱</span><br><span class="line">  set(trapTarget, key, value, receiver) &#123;</span><br><span class="line">    //忽略已有属性</span><br><span class="line">    if(!trapTarget.hasOwnProperty(key)) &#123;</span><br><span class="line">      if(isNaN(value)) &#123;</span><br><span class="line">        throw new TypeError(&apos;属性必须为数字&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return Reflect.set(trapTarget, key, value, receiver); //反射，用于使用内置set方法添加属性</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">proxy.count = 1; // 此时set陷阱被调用，是数字所以可以赋值</span><br><span class="line">console.log(target.count) // 1</span><br><span class="line">proxy.name = &apos;proxy&apos;;</span><br><span class="line">console.log(target.name) // &apos;proxy&apos;，target已有name属性，所以可以赋值</span><br><span class="line">proxy.notNumber = &apos;a&apos;; // Uncaught TypeError: 属性必须为数字，给不存在的属性赋值并且值不是数字则抛错</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;实现简单版响应式：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">let onWatch = (obj, setBind, getLogger) =&gt; &#123;</span><br><span class="line">  let handler = &#123;</span><br><span class="line">    //set陷阱</span><br><span class="line">    set(target, property, value, receiver) &#123;</span><br><span class="line">      setBind(value, property)</span><br><span class="line">      return Reflect.set(target, property, value)</span><br><span class="line">    &#125;,</span><br><span class="line">    //get陷阱</span><br><span class="line">    get(target, property, receiver) &#123;</span><br><span class="line">      getLogger(target, property)</span><br><span class="line">      return Reflect.get(target, property, receiver)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return new Proxy(obj, handler)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let obj = &#123; a: 1 &#125;</span><br><span class="line">let p = onWatch(</span><br><span class="line">  obj,</span><br><span class="line">  (v, property) =&gt; &#123;</span><br><span class="line">    console.log(`监听到属性$&#123;property&#125;改变为$&#123;v&#125;`)</span><br><span class="line">  &#125;,</span><br><span class="line">  (target, property) =&gt; &#123;</span><br><span class="line">    console.log(`&apos;$&#123;property&#125;&apos; = $&#123;target[property]&#125;`)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">p.a = 2 // 监听到属性a改变</span><br><span class="line">p.a // &apos;a&apos; = 2</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;应用举例：用 get 陷阱验证对象结构、用 has 陷阱隐藏已有属性、用 deleteProperty 陷阱防止删除属性</p>
+<h3 id="4-数组方法"><a href="#4-数组方法" class="headerlink" title="4. 数组方法"></a>4. 数组方法</h3><p>&#160; &#160; &#160; &#160;<strong>面试题：map, filter, reduce 各自有什么作用？</strong></p>
+<ul>
+<li>map：[].map((当前索引元素，索引，原数组) =&gt; {})，遍历原数组，每个元素做相同的操作，生成一个新数组</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].map(v =&gt; v + 1) // -&gt; [2, 3, 4]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>filter：[].filter((当前索引元素，索引，原数组) =&gt; {})，遍历原数组时将返回 true 的元素放入新数组</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let newArray = [1, 2, 4, 6].filter(item =&gt; item !== 6) // [1,2,4]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>reduce：[].reduce((累计值、当前元素、当前索引、原数组) =&gt; {}, 初始值)，将数组中的元素通过回调函数最终转换为一个值</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//在一次执行回调函数时，当前值和初始值相加得出结果 1，该结果会在第二次执行回调函数时当做第一个参数传入</span><br><span class="line">const sum = [1, 2, 3].reduce((acc, current) =&gt; acc + current, 0) // 累加为6</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-01-16T03:51:50.962Z">2019-01-16</time>
                 
                 <div class="level-item">
@@ -290,7 +487,7 @@
                         文章数
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        8
                     </p>
                 </div>
             </div>
@@ -384,7 +581,7 @@
                 <span class="level-item">前端面试之道</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/年度总结/">
@@ -406,7 +603,7 @@
         <h3 class="menu-label">
             标签缩略
         </h3>
-        <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/个人总结/" style="font-size: 10px;">个人总结</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+        <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/个人总结/" style="font-size: 10px;">个人总结</a> <a href="/tags/面试/" style="font-size: 20px;">面试</a>
     </div>
 </div>
 
@@ -420,6 +617,44 @@
         <h3 class="menu-label">
             最近的文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/01/19/JS 异步编程及常考面试题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JS 异步编程及常考面试题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-19T06:51:47.240Z">2019-01-19</time></div>
+                    <a href="/2019/01/19/JS 异步编程及常考面试题/" class="has-link-black-ter is-size-6">JS 异步编程及常考面试题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/17/ES6知识点及常考面试题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ES6知识点及常考面试题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-17T02:18:27.671Z">2019-01-17</time></div>
+                    <a href="/2019/01/17/ES6知识点及常考面试题/" class="has-link-black-ter is-size-6">ES6知识点及常考面试题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -478,44 +713,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="express+mlab登录注册">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-02T09:08:47.875Z">2018-11-02</time></div>
-                    <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="has-link-black-ter is-size-6">express+mlab登录注册</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/前端笔记/">前端笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/10/24/base64 转 blob 通用方法/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="base64 转 blob 通用方法">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T11:20:27.337Z">2018-10-24</time></div>
-                    <a href="/2018/10/24/base64 转 blob 通用方法/" class="has-link-black-ter is-size-6">base64 转 blob 通用方法</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/tips/">tips</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -534,7 +731,7 @@
                     <span class="level-item">January 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -624,7 +821,7 @@
                             <span class="level-item">面试</span>
                         </span>
                         <span class="level-end">
-                            <span class="level-item tag">1</span>
+                            <span class="level-item tag">3</span>
                         </span>
                     </a>
                 </li>
@@ -653,6 +850,44 @@
         
         <article class="media">
             
+            <a href="/2019/01/19/JS 异步编程及常考面试题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="JS 异步编程及常考面试题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-19T06:51:47.240Z">2019-01-19</time></div>
+                    <a href="/2019/01/19/JS 异步编程及常考面试题/" class="has-link-black-ter is-size-6">JS 异步编程及常考面试题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/01/17/ES6知识点及常考面试题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ES6知识点及常考面试题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-17T02:18:27.671Z">2019-01-17</time></div>
+                    <a href="/2019/01/17/ES6知识点及常考面试题/" class="has-link-black-ter is-size-6">ES6知识点及常考面试题</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/前端面试之道/">前端面试之道</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/01/16/JS基础知识及常考面试题/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="JS基础知识及常考面试题">
@@ -708,44 +943,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="express+mlab登录注册">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-02T09:08:47.875Z">2018-11-02</time></div>
-                    <a href="/2018/11/02/node试水（一）express+mlab登录注册/" class="has-link-black-ter is-size-6">express+mlab登录注册</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/前端笔记/">前端笔记</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/10/24/base64 转 blob 通用方法/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="base64 转 blob 通用方法">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-24T11:20:27.337Z">2018-10-24</time></div>
-                    <a href="/2018/10/24/base64 转 blob 通用方法/" class="has-link-black-ter is-size-6">base64 转 blob 通用方法</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/tips/">tips</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -764,7 +961,7 @@
                     <span class="level-item">January 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -854,7 +1051,7 @@
                             <span class="level-item">面试</span>
                         </span>
                         <span class="level-end">
-                            <span class="level-item tag">1</span>
+                            <span class="level-item tag">3</span>
                         </span>
                     </a>
                 </li>
