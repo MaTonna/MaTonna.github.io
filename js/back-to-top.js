@@ -7,7 +7,7 @@ $(document).ready(function () {
     var lastScrollTop = 0;
     var rightMargin = 20;
     var bottomMargin = 20;
-
+    var lastState = null;
     var state = {
         base: {
             classname: 'card has-text-centered',
@@ -36,7 +36,24 @@ $(document).ready(function () {
         classname: state['mobile-hidden'].classname + ' rise-up',
     });
 
+    function isStateEquals(prev, next) {
+        for (var prop in prev) {
+            if (!next.hasOwnProperty(prop) || next[prop] !== prev[prop]) {
+                return false;
+            }
+        }
+        for (var prop in next) {
+            if (!prev.hasOwnProperty(prop) || prev[prop] !== prev[prop]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     function applyState(state) {
+        if (lastState !== null && isStateEquals(lastState, state)) {
+            return;
+        }
         $button.attr('class', state.classname);
         for (let prop in state) {
             if (prop === 'classname') {
@@ -44,6 +61,7 @@ $(document).ready(function () {
             }
             $button.css(prop, state[prop]);
         }
+        lastState = state;
     }
 
     function isDesktop() {
@@ -75,6 +93,10 @@ $(document).ready(function () {
         }));
     }
 
+    function getScrollTop() {
+        return $(window).scrollTop();
+    }
+
     function getScrollBottom() {
         return $(window).scrollTop() + $(window).height();
     }
@@ -98,7 +120,7 @@ $(document).ready(function () {
             var padding = ($mainColumn.outerWidth() - $mainColumn.width()) / 2;
             var maxLeft = $(window).width() - getButtonWidth() - rightMargin;
             var maxBottom = $footer.offset().top + getButtonHeight() / 2 + bottomMargin;
-            if (getScrollBottom() < getRightSidebarBottom() + padding + getButtonHeight()) {
+            if (getScrollTop() == 0 || getScrollBottom() < getRightSidebarBottom() + padding + getButtonHeight()) {
                 nextState = state['desktop-hidden'];
             } else if (getScrollBottom() < maxBottom) {
                 nextState = state['desktop-visible'];
