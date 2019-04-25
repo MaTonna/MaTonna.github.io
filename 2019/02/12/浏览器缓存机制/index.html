@@ -1,98 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>MaTonna&#39;s blog</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/gitment.css">
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
-</head>
-<body>
-<header class="header">
-    <div class="header-inner">
-        <div class="header-title">
-
-        </div>
-        <nav class="header-nav">
-            
-            <a href="/" class="header-nav-link">
-                首页
-            </a>
-            
-
-            
-            <a href="/archives" class="header-nav-link">
-                归档
-            </a>
-            
-
-            
-
-            
-        </nav>
-    </div>
-</header>
-<header class="mobile-header">
-    <div class="mobile-nav">
-        <div class="mobile-nav-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="mobile-nav-title">
-            <a href="/" class="mobile-nav-title-link">MaTonna's Blog</a>
-        </div>
-
-    </div>
-    <nav class="mobile-menu">
-        <ul class="mobile-menu-list">
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-home"></i>
-                <a href="/" class="mobile-nav-link">首页</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-archive"></i>
-                <a href="/archives" class="mobile-nav-link">归档</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-tag"></i>
-                <a href="/tags" class="mobile-nav-link">标签</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-about"></i>
-                <a href="/about/" class="mobile-nav-link">关于</a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<div class="main">
-    <div class="content-inner">
-        <div class="posts">
-    <article class="post-whole">
-        <div class="post-title">
-            <h2 class="title">浏览器缓存机制</h2>
-            <div class="post-meta">
-                <span class="post-time">2019-02-12</span>
-                
-                <span class="post-category">
-                    
-                    <a class="category" href="/categories/前端面试之道/">前端面试之道</a>
-                    
-                </span>
-                
-                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
-            </div>
-        </div>
-        <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-缓存位置"><span class="toc-text">1. 缓存位置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Service-Worker"><span class="toc-text">Service Worker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory-Cache"><span class="toc-text">Memory Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Disk-Cache"><span class="toc-text">Disk Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Push-Cache"><span class="toc-text">Push Cache</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-缓存策略"><span class="toc-text">2. 缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#强缓存"><span class="toc-text">强缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#协商缓存"><span class="toc-text">协商缓存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实际场景应用缓存策略"><span class="toc-text">实际场景应用缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#频繁变动的资源"><span class="toc-text">频繁变动的资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码文件"><span class="toc-text">代码文件</span></a></li></ol></li></ol>
-    <div class="back-to-top" id="back-to-top">
-        <a href="javascript:void(0);">回到顶部</a>
-    </div>
-</div>
-        <div class="post-content">
-            <p>&#160; &#160; &#160; &#160;缓存可以简单高效的优化性能，可以显著减少网络传输带来的损耗。浏览器缓存可以帮我们在数据请求中的网络请求和浏览器响应这两步优化性能，直接使用缓存而不发起请求，或者发起请求但是后端存储的数据和前端一致，就没有必要将数据返回回来，就减少了响应数据。</p>
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 浏览器缓存机制 · MaTonna's blog</title><meta name="description" content="浏览器缓存机制 - MaTonna"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="github.com/MaTonna/atom.xml" title="MaTonna's blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">MaTonna's blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/MaTonna" target="_blank"><img src="/images/github.svg" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">浏览器缓存机制</h1><div class="post-info">Feb 12, 2019</div><div class="post-content"><p>&#160; &#160; &#160; &#160;缓存可以简单高效的优化性能，可以显著减少网络传输带来的损耗。浏览器缓存可以帮我们在数据请求中的网络请求和浏览器响应这两步优化性能，直接使用缓存而不发起请求，或者发起请求但是后端存储的数据和前端一致，就没有必要将数据返回回来，就减少了响应数据。</p>
 <h3 id="1-缓存位置"><a href="#1-缓存位置" class="headerlink" title="1. 缓存位置"></a>1. 缓存位置</h3><h4 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h4><p>&#160; &#160; &#160; &#160;它是浏览器背后的独立线程，一般用来实现缓存功能。传输协议必须是 https，因为涉及到请求拦截，必须用 https 协议来保障安全。<br>&#160; &#160; &#160; &#160;实现缓存功能步骤：</p>
 <ol>
 <li>注册 Service Worker</li>
@@ -130,63 +36,12 @@
 <p>&#160; &#160; &#160; &#160;<strong>如果没有设置任何缓存策略，浏览器会采用一个启发式的算法，通常取响应头中的 Date 减去 Last-Modified 值的 10%作为缓存时间。</strong><br>&#160; &#160; &#160; &#160;<strong>缓存的优先级：Cache-Control &gt; Expires &gt; ETag &gt; Last-Modified</strong><br><img src="/img/content/cache-flow.png" alt="浏览器缓存机制流程图"></p>
 <h3 id="实际场景应用缓存策略"><a href="#实际场景应用缓存策略" class="headerlink" title="实际场景应用缓存策略"></a>实际场景应用缓存策略</h3><h4 id="频繁变动的资源"><a href="#频繁变动的资源" class="headerlink" title="频繁变动的资源"></a>频繁变动的资源</h4><p>&#160; &#160; &#160; &#160;频繁变动的资源首先使用 Cache-Control: no-cache 使浏览器每次都请求服务器，再配合 ETag 或者 Last-Modified 来验证资源是否有效，可以减少响应数据的大小。</p>
 <h4 id="代码文件"><a href="#代码文件" class="headerlink" title="代码文件"></a>代码文件</h4><p>&#160; &#160; &#160; &#160;可以用打包工具给文件名进行哈希处理，代码修改后才会生成新的文件名。然后就可以给代码文件设置一年的有效期 Cache-Control: max-age=3153600，这样就只有当 HTML 文件引入的文件名发生变化才会去下载最新的代码文件，否则就一直使用缓存。</p>
-
-        </div>
-        
-        <div class="post-tag">
-            
-            <a class="tag" href="/tags/面试/" title="面试">面试</a>
-            
-        </div>
-        
-    </article>
-</div>
-<div class="paginator">
-    
-        
-            <a class="prev" href="/2019/02/18/小程序-基础/">
-                <i class="iconfont icon-prev"></i>
-                <span class="nav-default">小程序-框架基础篇</span>
-                <span class="nav-mobile">上一篇</span>
-            </a>
-        
-        
-            <a class="next" href="/2019/01/25/浏览器基础知识点及常考面试题/">
-                <span class="nav-default">浏览器基础知识点及常考面试题</span>
-                <span class="nav-mobile">下一篇</span>
-                <i class="iconfont icon-next"></i>
-            </a>
-        
-    
-</div>
-<div id="comment-container"></div>
-    </div>
-</div>
-<footer class="footer-social">
-    
-
-    
-
-    
-
-    <div class="footer-copyright">
-        <p class="time-line">
-            &copy;
-            
-            
-            2019
-            &nbsp;<i class="iconfont icon-heart"></i>&nbsp;
-            <a target="_blank" href="https://github.com/MaTonna">MaTonna</a>
-        </p>
-    </div>
-</footer>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-    
-
-</script>
-</html>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'matonna';
+var disqus_identifier = '2019/02/12/浏览器缓存机制/';
+var disqus_title = '浏览器缓存机制';
+var disqus_url = 'github.com/MaTonna/2019/02/12/浏览器缓存机制/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//matonna.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2019/02/18/小程序-基础/" class="prev">PREV</a><a href="/2019/01/25/浏览器基础知识点及常考面试题/" class="next">NEXT</a></div><div class="copyright"><p>© 2018 - 2019 <a href="github.com/MaTonna">MaTonna</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"matonna",'auto');ga('send','pageview');</script></body></html>

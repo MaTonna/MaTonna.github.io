@@ -1,98 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>MaTonna&#39;s blog</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/gitment.css">
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
-</head>
-<body>
-<header class="header">
-    <div class="header-inner">
-        <div class="header-title">
-
-        </div>
-        <nav class="header-nav">
-            
-            <a href="/" class="header-nav-link">
-                首页
-            </a>
-            
-
-            
-            <a href="/archives" class="header-nav-link">
-                归档
-            </a>
-            
-
-            
-
-            
-        </nav>
-    </div>
-</header>
-<header class="mobile-header">
-    <div class="mobile-nav">
-        <div class="mobile-nav-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="mobile-nav-title">
-            <a href="/" class="mobile-nav-title-link">MaTonna's Blog</a>
-        </div>
-
-    </div>
-    <nav class="mobile-menu">
-        <ul class="mobile-menu-list">
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-home"></i>
-                <a href="/" class="mobile-nav-link">首页</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-archive"></i>
-                <a href="/archives" class="mobile-nav-link">归档</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-tag"></i>
-                <a href="/tags" class="mobile-nav-link">标签</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-about"></i>
-                <a href="/about/" class="mobile-nav-link">关于</a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<div class="main">
-    <div class="content-inner">
-        <div class="posts">
-    <article class="post-whole">
-        <div class="post-title">
-            <h2 class="title">使用Babel开发Typescript</h2>
-            <div class="post-meta">
-                <span class="post-time">2019-04-23</span>
-                
-                <span class="post-category">
-                    
-                    <a class="category" href="/categories/前端笔记/">前端笔记</a>
-                    
-                </span>
-                
-                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
-            </div>
-        </div>
-        <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置-tsconfig-json-文件"><span class="toc-text">配置 tsconfig.json 文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置-babel"><span class="toc-text">配置 babel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-src-index-ts-文件"><span class="toc-text">创建 src/index.ts 文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置-build-任务"><span class="toc-text">配置 build 任务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-TypeScript-开发-Ant-Design"><span class="toc-text">使用 TypeScript 开发 Ant Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-1"><span class="toc-text">安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-webpack"><span class="toc-text">使用 webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-2"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-webpack-config-js"><span class="toc-text">创建 webpack.config.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-src-index-tsx"><span class="toc-text">创建 src/index.tsx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-src-App-tsx"><span class="toc-text">创建 src/App.tsx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-dist-index-html-文件"><span class="toc-text">创建 dist/index.html 文件</span></a></li></ol></li></ol>
-    <div class="back-to-top" id="back-to-top">
-        <a href="javascript:void(0);">回到顶部</a>
-    </div>
-</div>
-        <div class="post-content">
-            <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev typescript</span><br><span class="line">npm install --save-dev @babel/core</span><br><span class="line">npm install --save-dev @babel/cli</span><br><span class="line">npm install --save-dev @babel/plugin-proposal-class-properties</span><br><span class="line">npm install --save-dev @babel/plugin-proposal-object-rest-spread</span><br><span class="line">npm install --save-dev @babel/preset-env</span><br><span class="line">npm install --save-dev @babel/preset-typescript</span><br></pre></td></tr></table></figure>
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 使用Babel开发Typescript · MaTonna's blog</title><meta name="description" content="使用Babel开发Typescript - MaTonna"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="github.com/MaTonna/atom.xml" title="MaTonna's blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">MaTonna's blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/MaTonna" target="_blank"><img src="/images/github.svg" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">使用Babel开发Typescript</h1><div class="post-info">Apr 23, 2019</div><div class="post-content"><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev typescript</span><br><span class="line">npm install --save-dev @babel/core</span><br><span class="line">npm install --save-dev @babel/cli</span><br><span class="line">npm install --save-dev @babel/plugin-proposal-class-properties</span><br><span class="line">npm install --save-dev @babel/plugin-proposal-object-rest-spread</span><br><span class="line">npm install --save-dev @babel/preset-env</span><br><span class="line">npm install --save-dev @babel/preset-typescript</span><br></pre></td></tr></table></figure>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="配置-tsconfig-json-文件"><a href="#配置-tsconfig-json-文件" class="headerlink" title="配置 tsconfig.json 文件"></a>配置 tsconfig.json 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    // Target latest version of ECMAScript.</span><br><span class="line">    &quot;target&quot;: &quot;esnext&quot;,</span><br><span class="line">    // Search under node_modules for non-relative imports.</span><br><span class="line">    &quot;moduleResolution&quot;: &quot;node&quot;,</span><br><span class="line">    // Process &amp; infer types from .js files.</span><br><span class="line">    &quot;allowJs&quot;: true,</span><br><span class="line">    // Don&apos;t emit; allow Babel to transform files.</span><br><span class="line">    &quot;noEmit&quot;: true,</span><br><span class="line">    // Enable strictest settings like strictNullChecks &amp; noImplicitAny.</span><br><span class="line">    &quot;strict&quot;: true,</span><br><span class="line">    // Disallow features that require cross-file information for emit.</span><br><span class="line">    &quot;isolatedModules&quot;: true,</span><br><span class="line">    // Import non-ES modules as default imports.</span><br><span class="line">    &quot;esModuleInterop&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;include&quot;: [</span><br><span class="line">    &quot;src&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="配置-babel"><a href="#配置-babel" class="headerlink" title="配置 babel"></a>配置 babel</h4><p>在根目录下创建 .babelrc 文件，内容如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;presets&quot;: [</span><br><span class="line">        &quot;@babel/preset-env&quot;,</span><br><span class="line">        &quot;@babel/preset-typescript&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;plugins&quot;: [</span><br><span class="line">        &quot;@babel/proposal-class-properties&quot;,</span><br><span class="line">        &quot;@babel/proposal-object-rest-spread&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -116,63 +22,12 @@
 <h4 id="创建-dist-index-html-文件"><a href="#创建-dist-index-html-文件" class="headerlink" title="创建 dist/index.html 文件"></a>创建 dist/index.html 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">    &lt;title&gt;Ant Design&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;app.bundle.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 <p>运行 webpack 命令<br>打开 dist/index.html 文件，查看效果</p>
 <p>参考资料：<br><a href="https://github.com/Microsoft/TypeScript-Babel-Starter">https://github.com/Microsoft/TypeScript-Babel-Starter</a><br><a href="https://zhuanlan.zhihu.com/p/59023070">https://zhuanlan.zhihu.com/p/59023070</a></p>
-
-        </div>
-        
-        <div class="post-tag">
-            
-            <a class="tag" href="/tags/ts/" title="ts">ts</a>
-            
-        </div>
-        
-    </article>
-</div>
-<div class="paginator">
-    
-        
-            <a class="prev" href="/2019/04/25/处理树组件需要的数据结构/">
-                <i class="iconfont icon-prev"></i>
-                <span class="nav-default">处理树组件需要的数据结构</span>
-                <span class="nav-mobile">上一篇</span>
-            </a>
-        
-        
-            <a class="next" href="/2019/03/20/H5的rem适配方案/">
-                <span class="nav-default">H5的rem适配方案</span>
-                <span class="nav-mobile">下一篇</span>
-                <i class="iconfont icon-next"></i>
-            </a>
-        
-    
-</div>
-<div id="comment-container"></div>
-    </div>
-</div>
-<footer class="footer-social">
-    
-
-    
-
-    
-
-    <div class="footer-copyright">
-        <p class="time-line">
-            &copy;
-            
-            
-            2019
-            &nbsp;<i class="iconfont icon-heart"></i>&nbsp;
-            <a target="_blank" href="https://github.com/MaTonna">MaTonna</a>
-        </p>
-    </div>
-</footer>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-    
-
-</script>
-</html>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'matonna';
+var disqus_identifier = '2019/04/23/使用Babel开发Typescript/';
+var disqus_title = '使用Babel开发Typescript';
+var disqus_url = 'github.com/MaTonna/2019/04/23/使用Babel开发Typescript/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//matonna.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2019/04/25/处理树组件需要的数据结构/" class="prev">PREV</a><a href="/2019/03/20/H5的rem适配方案/" class="next">NEXT</a></div><div class="copyright"><p>© 2018 - 2019 <a href="github.com/MaTonna">MaTonna</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"matonna",'auto');ga('send','pageview');</script></body></html>
