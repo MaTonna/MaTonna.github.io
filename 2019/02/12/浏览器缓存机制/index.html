@@ -86,50 +86,69 @@
         </div>
         <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-缓存位置"><span class="toc-text">1. 缓存位置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Service-Worker"><span class="toc-text">Service Worker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory-Cache"><span class="toc-text">Memory Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Disk-Cache"><span class="toc-text">Disk Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Push-Cache"><span class="toc-text">Push Cache</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-缓存策略"><span class="toc-text">2. 缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#强缓存"><span class="toc-text">强缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#协商缓存"><span class="toc-text">协商缓存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实际场景应用缓存策略"><span class="toc-text">实际场景应用缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#频繁变动的资源"><span class="toc-text">频繁变动的资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码文件"><span class="toc-text">代码文件</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">1. 缓存位置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">Service Worker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">Memory Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">Disk Cache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">Push Cache</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">2. 缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">强缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">协商缓存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-text">实际场景应用缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">频繁变动的资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-text">代码文件</span></a></li></ol></li></ol>
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>&#160; &#160; &#160; &#160;缓存可以简单高效的优化性能，可以显著减少网络传输带来的损耗。浏览器缓存可以帮我们在数据请求中的网络请求和浏览器响应这两步优化性能，直接使用缓存而不发起请求，或者发起请求但是后端存储的数据和前端一致，就没有必要将数据返回回来，就减少了响应数据。</p>
-<h3 id="1-缓存位置"><a href="#1-缓存位置" class="headerlink" title="1. 缓存位置"></a>1. 缓存位置</h3><h4 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h4><p>&#160; &#160; &#160; &#160;它是浏览器背后的独立线程，一般用来实现缓存功能。传输协议必须是 https，因为涉及到请求拦截，必须用 https 协议来保障安全。<br>&#160; &#160; &#160; &#160;实现缓存功能步骤：</p>
+            <p>       缓存可以简单高效的优化性能，可以显著减少网络传输带来的损耗。浏览器缓存可以帮我们在数据请求中的网络请求和浏览器响应这两步优化性能，直接使用缓存而不发起请求，或者发起请求但是后端存储的数据和前端一致，就没有必要将数据返回回来，就减少了响应数据。</p>
+<h3>1. 缓存位置</h3>
+<h4>Service Worker</h4>
+<p>       它是浏览器背后的独立线程，一般用来实现缓存功能。传输协议必须是 https，因为涉及到请求拦截，必须用 https 协议来保障安全。
+       实现缓存功能步骤：</p>
 <ol>
 <li>注册 Service Worker</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line"><span class="keyword">if</span> (navigator.serviceWorker) &#123;</span><br><span class="line">  navigator.serviceWorker</span><br><span class="line">    .register(<span class="string">'sw.js'</span>)</span><br><span class="line">    .<span class="keyword">then</span>(<span class="keyword">function</span>(registration) &#123;</span><br><span class="line">      console.log(<span class="string">'service worker 注册成功'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="keyword">function</span>(err) &#123;</span><br><span class="line">      console.log(<span class="string">'servcie worker 注册失败'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line"><span class="keyword">if</span> (navigator.serviceWorker) &#123;</span><br><span class="line">  navigator.serviceWorker</span><br><span class="line">    .register(<span class="string">'sw.js'</span>)</span><br><span class="line">    .<span class="keyword">then</span>(<span class="keyword">function</span>(registration) &#123;</span><br><span class="line">      console.log(<span class="string">'service worker 注册成功'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="keyword">function</span>(err) &#123;</span><br><span class="line">      console.log(<span class="string">'servcie worker 注册失败'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>监听到 install 事件，缓存需要的文件</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// sw.js</span><br><span class="line">// 监听 `install` 事件，回调中缓存所需文件</span><br><span class="line">self.addEventListener(<span class="string">'install'</span>, e =&gt; &#123;</span><br><span class="line">  e.waitUntil(</span><br><span class="line">    caches.open(<span class="string">'my-cache'</span>).<span class="keyword">then</span>(<span class="keyword">function</span>(cache) &#123;</span><br><span class="line">      <span class="built_in">return</span> cache.addAll([<span class="string">'./index.html'</span>, <span class="string">'./index.js'</span>])</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// sw.js</span><br><span class="line">// 监听 `install` 事件，回调中缓存所需文件</span><br><span class="line">self.addEventListener(<span class="string">'install'</span>, e =&gt; &#123;</span><br><span class="line">  e.waitUntil(</span><br><span class="line">    caches.open(<span class="string">'my-cache'</span>).<span class="keyword">then</span>(<span class="keyword">function</span>(cache) &#123;</span><br><span class="line">      <span class="built_in">return</span> cache.addAll([<span class="string">'./index.html'</span>, <span class="string">'./index.js'</span>])</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
 <li>下次用户访问就通过拦截请求查询是否存在缓存，存在则直接读取文件，否则就去请求数据</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 拦截所有请求事件</span><br><span class="line">// 如果缓存中已经有请求的数据就直接用缓存，否则去请求数据</span><br><span class="line">self.addEventListener(<span class="string">'fetch'</span>, e =&gt; &#123;</span><br><span class="line">  e.respondWith(</span><br><span class="line">    caches.match(e.request).<span class="keyword">then</span>(<span class="keyword">function</span>(response) &#123;</span><br><span class="line">      <span class="keyword">if</span> (response) &#123;</span><br><span class="line">        <span class="built_in">return</span> response</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(<span class="string">'fetch source'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;在开发者工具中的 Application 可以看到 Service Worker 已经启动，Cache 中也可以看到我们缓存的文件。</p>
-<h4 id="Memory-Cache"><a href="#Memory-Cache" class="headerlink" title="Memory Cache"></a>Memory Cache</h4><p>&#160; &#160; &#160; &#160;Memory Cache 是内存中的缓存，读取速度比磁盘快，但是缓存持续时间短，随着进程的释放而释放，一旦关闭 tab 页，内存中的缓存就会被释放。<br>&#160; &#160; &#160; &#160;但是不能让数据都存在内存中，计算机内存比硬盘容量小，大文件一般不存储在内存中，内存如果使用率高，文件会优先存储进硬盘。</p>
-<h4 id="Disk-Cache"><a href="#Disk-Cache" class="headerlink" title="Disk Cache"></a>Disk Cache</h4><p>&#160; &#160; &#160; &#160;Disk Cache 是存储在硬盘中的缓存，虽然速度较慢，但是比 Memory Cache 胜在容量和存储时效性上。它会根据 HTTP Header 中的字段判断哪些资源需要缓存，哪些资源可以不请求直接使用，哪些资源已经过期需要重新请求。即使跨站点，相同地址的资源一旦被硬盘缓存下来就不会重新请求数据。</p>
-<h4 id="Push-Cache"><a href="#Push-Cache" class="headerlink" title="Push Cache"></a>Push Cache</h4><p>&#160; &#160; &#160; &#160;Push Cache 是 HTTP/2 中的内容，当以上三种缓存都没有命中时才会使用，缓存时间短暂，只在 session 中，一旦 session 结束就会被释放。</p>
-<h3 id="2-缓存策略"><a href="#2-缓存策略" class="headerlink" title="2. 缓存策略"></a>2. 缓存策略</h3><p>&#160; &#160; &#160; &#160;浏览器缓存策略分为强缓存和协商缓存两种，都是通过设置 HTTP Header 来实现的。</p>
-<h4 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h4><p>&#160; &#160; &#160; &#160;强缓存表示在缓存期间不需要请求，state code 为 200。</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 拦截所有请求事件</span><br><span class="line">// 如果缓存中已经有请求的数据就直接用缓存，否则去请求数据</span><br><span class="line">self.addEventListener(<span class="string">'fetch'</span>, e =&gt; &#123;</span><br><span class="line">  e.respondWith(</span><br><span class="line">    caches.match(e.request).<span class="keyword">then</span>(<span class="keyword">function</span>(response) &#123;</span><br><span class="line">      <span class="keyword">if</span> (response) &#123;</span><br><span class="line">        <span class="built_in">return</span> response</span><br><span class="line">      &#125;</span><br><span class="line">      console.log(<span class="string">'fetch source'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>       在开发者工具中的 Application 可以看到 Service Worker 已经启动，Cache 中也可以看到我们缓存的文件。</p>
+<h4>Memory Cache</h4>
+<p>       Memory Cache 是内存中的缓存，读取速度比磁盘快，但是缓存持续时间短，随着进程的释放而释放，一旦关闭 tab 页，内存中的缓存就会被释放。
+       但是不能让数据都存在内存中，计算机内存比硬盘容量小，大文件一般不存储在内存中，内存如果使用率高，文件会优先存储进硬盘。</p>
+<h4>Disk Cache</h4>
+<p>       Disk Cache 是存储在硬盘中的缓存，虽然速度较慢，但是比 Memory Cache 胜在容量和存储时效性上。它会根据 HTTP Header 中的字段判断哪些资源需要缓存，哪些资源可以不请求直接使用，哪些资源已经过期需要重新请求。即使跨站点，相同地址的资源一旦被硬盘缓存下来就不会重新请求数据。</p>
+<h4>Push Cache</h4>
+<p>       Push Cache 是 HTTP/2 中的内容，当以上三种缓存都没有命中时才会使用，缓存时间短暂，只在 session 中，一旦 session 结束就会被释放。</p>
+<h3>2. 缓存策略</h3>
+<p>       浏览器缓存策略分为强缓存和协商缓存两种，都是通过设置 HTTP Header 来实现的。</p>
+<h4>强缓存</h4>
+<p>       强缓存表示在缓存期间不需要请求，state code 为 200。</p>
 <ol>
 <li>设置 Expires</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expires: Wed, 22 Oct 2018 08:41:00 GMT</span><br></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;表示会在特定的时间后过期，需要再次请求。但是 Expires 受限于本地时间，修改了本地时间可能会造成缓存失败。</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expires: Wed, 22 Oct 2018 08:41:00 GMT</span><br></pre></td></tr></table></figure></p>
+<p>       表示会在特定的时间后过期，需要再次请求。但是 Expires 受限于本地时间，修改了本地时间可能会造成缓存失败。</p>
 <ol start="2">
 <li>设置 Cache-control</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-control: max-age=30</span><br></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;表示资源会在 30s 后过期，需要再次请求，优先级高于 Expires，可以在请求头或者响应头中设置，可以组合使用多种指令。比如说我们希望资源能被缓存下来，并且是客户端和代理服务器都能缓存，还能设置缓存失效时间等等。<br><img src="/img/content/cache-control.png" alt="常见指令作用"></p>
-<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>&#160; &#160; &#160; &#160;协商缓存表示如果缓存过期了，需要发起请求验证资源是否有更新。当浏览器发起请求验证资源时，如果资源没有改变则返回 304，并且更新浏览器缓存有效期。</p>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-control: max-age=30</span><br></pre></td></tr></table></figure></p>
+<p>       表示资源会在 30s 后过期，需要再次请求，优先级高于 Expires，可以在请求头或者响应头中设置，可以组合使用多种指令。比如说我们希望资源能被缓存下来，并且是客户端和代理服务器都能缓存，还能设置缓存失效时间等等。
+<img src="/img/content/cache-control.png" alt="常见指令作用"></p>
+<h4>协商缓存</h4>
+<p>       协商缓存表示如果缓存过期了，需要发起请求验证资源是否有更新。当浏览器发起请求验证资源时，如果资源没有改变则返回 304，并且更新浏览器缓存有效期。</p>
 <ol>
-<li>设置 Last-Modified<br>&#160; &#160; &#160; &#160;Last-Modified 表示本地文件最后修改地址，If-Modified-Since 会将 Last-Modified 的值发送给服务器，询问服务器在该日期后资源是否有更新，有更新的话则讲新的资源文件发送回来，否则返回 304。<br>&#160; &#160; &#160; &#160;但是如果本地打开了缓存文件，会造成 Last-Modified 被修改，服务端不能命中缓存导致发送相同的资源。Last-Modified 以秒计时，如果在不可感知的时间内修改完文件，服务端则认为资源命中，不会返回正确的资源。</li>
-<li>设置 ETag<br>&#160; &#160; &#160; &#160;ETag 类似于文件指纹，If-None-Match 会将当前 ETag 发送给服务器，询问 ETag 是否改变，有变动就发送新资源回来，并且优先级高于 Last-Modified。</li>
+<li>设置 Last-Modified
+       Last-Modified 表示本地文件最后修改地址，If-Modified-Since 会将 Last-Modified 的值发送给服务器，询问服务器在该日期后资源是否有更新，有更新的话则讲新的资源文件发送回来，否则返回 304。
+       但是如果本地打开了缓存文件，会造成 Last-Modified 被修改，服务端不能命中缓存导致发送相同的资源。Last-Modified 以秒计时，如果在不可感知的时间内修改完文件，服务端则认为资源命中，不会返回正确的资源。</li>
+<li>设置 ETag
+       ETag 类似于文件指纹，If-None-Match 会将当前 ETag 发送给服务器，询问 ETag 是否改变，有变动就发送新资源回来，并且优先级高于 Last-Modified。</li>
 </ol>
-<p>&#160; &#160; &#160; &#160;<strong>如果没有设置任何缓存策略，浏览器会采用一个启发式的算法，通常取响应头中的 Date 减去 Last-Modified 值的 10%作为缓存时间。</strong><br>&#160; &#160; &#160; &#160;<strong>缓存的优先级：Cache-Control &gt; Expires &gt; ETag &gt; Last-Modified</strong><br><img src="/img/content/cache-flow.png" alt="浏览器缓存机制流程图"></p>
-<h3 id="实际场景应用缓存策略"><a href="#实际场景应用缓存策略" class="headerlink" title="实际场景应用缓存策略"></a>实际场景应用缓存策略</h3><h4 id="频繁变动的资源"><a href="#频繁变动的资源" class="headerlink" title="频繁变动的资源"></a>频繁变动的资源</h4><p>&#160; &#160; &#160; &#160;频繁变动的资源首先使用 Cache-Control: no-cache 使浏览器每次都请求服务器，再配合 ETag 或者 Last-Modified 来验证资源是否有效，可以减少响应数据的大小。</p>
-<h4 id="代码文件"><a href="#代码文件" class="headerlink" title="代码文件"></a>代码文件</h4><p>&#160; &#160; &#160; &#160;可以用打包工具给文件名进行哈希处理，代码修改后才会生成新的文件名。然后就可以给代码文件设置一年的有效期 Cache-Control: max-age=3153600，这样就只有当 HTML 文件引入的文件名发生变化才会去下载最新的代码文件，否则就一直使用缓存。</p>
+<p>       <strong>如果没有设置任何缓存策略，浏览器会采用一个启发式的算法，通常取响应头中的 Date 减去 Last-Modified 值的 10%作为缓存时间。</strong>
+       <strong>缓存的优先级：Cache-Control &gt; Expires &gt; ETag &gt; Last-Modified</strong>
+<img src="/img/content/cache-flow.png" alt="浏览器缓存机制流程图"></p>
+<h3>实际场景应用缓存策略</h3>
+<h4>频繁变动的资源</h4>
+<p>       频繁变动的资源首先使用 Cache-Control: no-cache 使浏览器每次都请求服务器，再配合 ETag 或者 Last-Modified 来验证资源是否有效，可以减少响应数据的大小。</p>
+<h4>代码文件</h4>
+<p>       可以用打包工具给文件名进行哈希处理，代码修改后才会生成新的文件名。然后就可以给代码文件设置一年的有效期 Cache-Control: max-age=3153600，这样就只有当 HTML 文件引入的文件名发生变化才会去下载最新的代码文件，否则就一直使用缓存。</p>
 
         </div>
         
