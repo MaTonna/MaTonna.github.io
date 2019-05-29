@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 关于HTTP协议的知识 · MaTonna's blog</title><meta name="description" content="关于HTTP协议的知识 - MaTonna"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="github.com/MaTonna/atom.xml" title="MaTonna's blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">MaTonna's blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/MaTonna" target="_blank"><img src="/images/github.svg" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">关于HTTP协议的知识</h1><div class="post-info">May 23, 2019</div><div class="post-content"><h2 id="浏览器输入URL后HTTP请求返回的完整过程"><a href="#浏览器输入URL后HTTP请求返回的完整过程" class="headerlink" title="浏览器输入URL后HTTP请求返回的完整过程"></a>浏览器输入URL后HTTP请求返回的完整过程</h2><ol>
+<li>Redireact跳转<br>&#160; &#160; &#160; &#160;浏览器可能记录了地址永久跳转成新地址，所以要先判断是否需要Redireact，以及要跳转到哪里。</li>
+<li>App cache应用缓存<br>&#160; &#160; &#160; &#160;请求的资源可能缓存过了，没有缓存要向服务器请求资源，否则使用缓存。</li>
+<li>DNS查找<br>&#160; &#160; &#160; &#160;域名要转换成IP才能访问到服务器，所以要去查域名对应IP。</li>
+<li>创建TCP链接<br>&#160; &#160; &#160; &#160;要经过三次握手</li>
+<li>发送请求Request</li>
+<li>接收响应Response</li>
+</ol>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'matonna';
+var disqus_identifier = '2019/05/23/关于HTTP协议的知识/';
+var disqus_title = '关于HTTP协议的知识';
+var disqus_url = 'github.com/MaTonna/2019/05/23/关于HTTP协议的知识/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//matonna.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2019/05/29/JavaScript设计模式与开发实践笔记（1）/" class="prev">上一篇</a><a href="/2019/04/25/处理树组件需要的数据结构/" class="next">下一篇</a></div><div class="copyright"><p>© 2018 - 2019 <a href="github.com/MaTonna">MaTonna</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"matonna",'auto');ga('send','pageview');</script></body></html>
